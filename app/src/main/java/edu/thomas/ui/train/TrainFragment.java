@@ -1,4 +1,4 @@
-package edu.thomas.ui.home;
+package edu.thomas.ui.train;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import edu.thomas.databinding.FragmentHomeBinding;
+import edu.thomas.databinding.FragmentTrainBinding;
 
-public class HomeFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+public class TrainFragment extends Fragment {
+
+    private FragmentTrainBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        TrainViewModel trainViewModel =
+                new ViewModelProvider(this).get(TrainViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentTrainBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textTrain;
+        trainViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
