@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="edu.thomas.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/importer_un_billet"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="edu.thomas.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/importer_un_billet"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="edu.thomas.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/importer_un_billet"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

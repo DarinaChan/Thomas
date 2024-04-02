@@ -6,6 +6,7 @@
     <string name="importer_un_billet">Importer un billet</string>
     <string name="signer_un_incident">Signaler un incident</string>
     <string name="mon_profil">Mon profil</string>
+    <string name="app_name">Thomas</string>
 
     <string name="champs_obligatoire">*champs obligatoires</string>
     <string name="gare_de_depart">Gare de départ *</string>
