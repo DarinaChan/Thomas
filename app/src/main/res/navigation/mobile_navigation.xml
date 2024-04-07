@@ -3,23 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_train">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="edu.thomas.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_train"
+        android:name="edu.thomas.ui.train.TrainFragment"
+        android:label="@string/trajets"
+        tools:layout="@layout/fragment_train" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="edu.thomas.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_ticket"
+        android:name="edu.thomas.ui.ticket.TicketFragment"
+        android:label="@string/billet"
+        tools:layout="@layout/fragment_ticket" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="edu.thomas.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_report"
+        android:name="edu.thomas.ui.report.ReportFragment"
+        android:label="@string/signaler"
+        tools:layout="@layout/fragment_report" />
+
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="edu.thomas.ui.profile.ProfileFragment"
+        android:label="@string/signaler"
+        tools:layout="@layout/fragment_profile" />
+
 </navigation>

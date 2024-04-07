@@ -1,10 +1,44 @@
 <resources>
+    <string name="nom_de_ecran">Nom de l\'écran</string>
+    <string name="mes_trajet">Mes trajet</string>
+    <string name="choisir_un_trajet">Choisir un trajet</string>
+    <string name="comportement_suspect">Comportement suspect</string>
+    <string name="importer_un_billet">Importer un billet</string>
+    <string name="signer_un_incident">Signaler un incident</string>
+    <string name="mon_profil">Mon profil</string>
     <string name="app_name">Thomas</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="schedule_disruption">Perturbation des horaires</string>
-    <string name="suspicious_behavior">Comportement suspect</string>
-    <string name="abandoned_luggage">Bagage abandonne</string>
-    <string name="technical_problem">Probleme technique</string>
+
+    <string name="champs_obligatoire">*champs obligatoires</string>
+    <string name="gare_de_depart">Gare de départ *</string>
+    <string name="gare_d_arrivee">*champs obligatoires</string>
+    <string name="depart">Départ:</string>
+    <string name="arrivee">Arrivée:</string>
+    <string name="train_en_retard_de">Train en retard de</string>
+    <string name="minutes">minutes</string>
+    <string name="comportement_suspect_a_la_gare_de">Comportement suspect à la gare de</string>
+    <string name="profil_du_voyageur">Profil du voyageur</string>
+    <string name="le_trajet_a_bien_ete_enregistre">Le trajet a bien été enregistré !</string>
+    <string name="merci_pour_votre_retour">Merci pour votre retour !</string>
+    <string name="reference_de_reservation">Référence de réservation *</string>
+    <string name="nom_du_titulaire_du_billet">Nom du titulaire du billet</string>
+    <string name="pour_retrouver_votre_billet">Pour retrouver votre billet, veuillez renseigner ces informations</string>
+    <string name="decrivez_l_incident">Décrivez l’incident le plus précisément possible</string>
+    <string name="perturbation_des_horaires">Perturbation des horaires</string>
+    <string name="baggage_abandonne">Baggage abandonné</string>
+    <string name="probleme_technique">Problème technique</string>
+    <string name="vos_informations">Vos informations</string>
+    <string name="profil_voyageur">Profil voyageur</string>
+    <string name="notifications">Notifications</string>
+    <string name="parametres_avances">Paramètres avancés</string>
+
+    <string name="trajets">Trajets</string>
+    <string name="billet">Billet</string>
+    <string name="signaler">Signaler</string>
+    <string name="profil">Profil</string>
+    <string name="toujours_en_cours">TOUJOURS EN COURS</string>
+    <string name="resolu">RÉVOLU</string>
+    <string name="rechercher_mon_trajet">RECHERCHER MON TRAJET</string>
+    <string name="envoyer">ENVOYER</string>
+    <string name="se_deconnecter">SE DÉCONNECTER</string>
+    <string name="ajouter_le_billet">AJOUTER LE BILLET</string>
 </resources>
