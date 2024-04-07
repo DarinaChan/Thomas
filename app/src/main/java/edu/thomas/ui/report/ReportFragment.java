@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import edu.thomas.R;
 import edu.thomas.databinding.FragmentReportBinding;
 
 public class ReportFragment extends Fragment {
@@ -18,15 +19,8 @@ public class ReportFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ReportViewModel reportViewModel =
-                new ViewModelProvider(this).get(ReportViewModel.class);
 
-        binding = FragmentReportBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textReport;
-        reportViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        return inflater.inflate(R.layout.incident_reporting_layout, container, false);
     }
 
     @Override
