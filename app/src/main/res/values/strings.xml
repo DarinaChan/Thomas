@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="schedule_disruption">Perturbation des horaires</string>
+    <string name="suspicious_behavior">Comportement suspect</string>
+    <string name="abandoned_luggage">Bagage abandonne</string>
+    <string name="technical_problem">Probleme technique</string>
 </resources>
