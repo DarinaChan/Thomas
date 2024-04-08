@@ -7,26 +7,26 @@
 
     <fragment
         android:id="@+id/navigation_train"
-        android:name="edu.thomas.ui.train.TrainFragment"
+        android:name="edu.thomas.FragmentTrain"
         android:label="@string/trajets"
         tools:layout="@layout/fragment_train" />
 
     <fragment
         android:id="@+id/navigation_ticket"
-        android:name="edu.thomas.ui.ticket.TicketFragment"
+        android:name="edu.thomas.FragmentTicket"
         android:label="@string/billet"
         tools:layout="@layout/fragment_ticket" />
 
     <fragment
         android:id="@+id/navigation_report"
-        android:name="edu.thomas.ui.report.ReportFragment"
+        android:name="edu.thomas.FragmentReport"
         android:label="@string/signaler"
         tools:layout="@layout/fragment_report" />
 
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="edu.thomas.ui.profile.ProfileFragment"
+        android:name="edu.thomas.FragmentProfile"
         android:label="@string/signaler"
         tools:layout="@layout/fragment_profile" />
 
