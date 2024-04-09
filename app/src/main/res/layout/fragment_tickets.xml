@@ -8,26 +8,72 @@
     android:gravity="center_horizontal">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
+        style="?attr/materialCardViewOutlinedStyle"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        style="?attr/materialCardViewOutlinedStyle"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/blue"
         app:cardBackgroundColor="@color/light_blue"
-        app:layout_constraintLeft_toLeftOf="parent">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:strokeColor="@color/blue"
+        app:strokeWidth="1dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="8dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/billet"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                />
+                android:text="@string/pour_retrouver_votre_billet"
+                android:textColor="@color/blue" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="350sp"
+        android:textColor="@color/dark_grey"
+        android:textAlignment="viewStart"
+        android:layout_marginBottom="24sp"
+        android:text="@string/champs_obligatoire" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reference"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:height="64dp"
+        android:minWidth="350dp"
+        android:paddingBottom="8sp"
+        android:hint="@string/reference_de_reservation">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:height="64dp"
+        android:minWidth="350dp"
+        android:paddingBottom="24sp"
+        android:hint="@string/nom_du_titulaire_du_billet">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/abandonedLuggage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="350dp"
+        android:height="64dp"
+        android:text="@string/ajouter_le_billet"
+        app:layout_constraintLeft_toLeftOf="parent" />
 </LinearLayout>
