@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/navigation_train"
+        android:id="@+id/navigation_journeys"
         android:icon="@drawable/ic_train_black_24dp"
+        app:showAsAction="ifRoom"
         android:title="@string/trajets" />
 
     <item
-        android:id="@+id/navigation_ticket"
+        android:id="@+id/navigation_tickets"
         android:icon="@drawable/ic_ticket_black_24dp"
+        app:showAsAction="ifRoom"
         android:title="@string/billet" />
 
     <item
         android:id="@+id/navigation_report"
         android:icon="@drawable/ic_report_black_24dp"
+        app:showAsAction="ifRoom"
         android:title="@string/signaler" />
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile_black_24dp"
+        app:showAsAction="ifRoom"
         android:title="@string/profil" />
 
 </menu>

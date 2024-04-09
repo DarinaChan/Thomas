@@ -1,16 +1,23 @@
 <resources>
-    <string name="nom_de_ecran">Nom de l\'écran</string>
+    <string name="app_name">Thomas</string>
+    <!-- Login page -->
+    <string name="email">E-mail</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">Connexion</string>
+    <string name="password_recovery">Mot de passe oublié ?</string>
+    <string name="register">Créer un compte</string>
+    <string name="guest">Continuer en tant qu\'invité</string>
+
     <string name="mes_trajet">Mes trajet</string>
     <string name="choisir_un_trajet">Choisir un trajet</string>
     <string name="comportement_suspect">Comportement suspect</string>
     <string name="importer_un_billet">Importer un billet</string>
     <string name="signer_un_incident">Signaler un incident</string>
     <string name="mon_profil">Mon profil</string>
-    <string name="app_name">Thomas</string>
 
     <string name="champs_obligatoire">*champs obligatoires</string>
     <string name="gare_de_depart">Gare de départ *</string>
-    <string name="gare_d_arrivee">*champs obligatoires</string>
+    <string name="gare_d_arrivee">Gare d\'arrivée</string>
     <string name="depart">Départ:</string>
     <string name="arrivee">Arrivée:</string>
     <string name="train_en_retard_de">Train en retard de</string>
