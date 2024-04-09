@@ -43,7 +43,8 @@
     <string name="signaler">Signaler</string>
     <string name="profil">Profil</string>
     <string name="toujours_en_cours">TOUJOURS EN COURS</string>
-    <string name="resolu">RÉVOLU</string>
+    <string name="resolu">RÉSOLU</string>
+    <string name="rechercher_un_trajet">RECHERCHER UN TRAJET</string>
     <string name="rechercher_mon_trajet">RECHERCHER MON TRAJET</string>
     <string name="envoyer">ENVOYER</string>
     <string name="se_deconnecter">SE DÉCONNECTER</string>

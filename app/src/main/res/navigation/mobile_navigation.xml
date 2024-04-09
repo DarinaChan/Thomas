@@ -5,6 +5,7 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_journeys">
 
+    <!-- Root views -->
     <fragment
         android:id="@+id/navigation_journeys"
         android:name="edu.thomas.FragmentJourneys"
@@ -26,7 +27,6 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="edu.thomas.FragmentProfile"
-        android:label="@string/signaler"
+        android:label="@string/mon_profil"
         tools:layout="@layout/fragment_profile" />
-
 </navigation>

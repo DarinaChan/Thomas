@@ -7,21 +7,6 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/search_train"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="350dp"
-        android:height="64dp"
-        android:text="@string/rechercher_un_trajet"
-        android:textColor="@color/dark_grey"
-        app:backgroundTint="@color/white"
-        app:icon="@drawable/ic_search_24dp"
-        app:iconTint="@color/dark_grey"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,10 +25,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mes_trajet"
+                android:text="@string/choisir_un_trajet"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
 </LinearLayout>
