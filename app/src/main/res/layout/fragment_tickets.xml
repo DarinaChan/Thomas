@@ -4,6 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:width="350dp"
+    android:layout_marginTop="32dp"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
@@ -35,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="350sp"
+        android:layout_marginTop="32dp"
         android:textColor="@color/dark_grey"
         android:textAlignment="viewStart"
         android:layout_marginBottom="24sp"
@@ -43,10 +46,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/reference"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:height="64dp"
-        android:minWidth="350dp"
         android:paddingBottom="8sp"
         android:hint="@string/reference_de_reservation">
         <com.google.android.material.textfield.TextInputEditText
@@ -57,10 +59,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:height="64dp"
-        android:minWidth="350dp"
         android:paddingBottom="24sp"
         android:hint="@string/nom_du_titulaire_du_billet">
         <com.google.android.material.textfield.TextInputEditText
