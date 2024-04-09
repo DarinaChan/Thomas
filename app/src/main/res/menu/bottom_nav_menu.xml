@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/navigation_train"
+        android:id="@+id/navigation_journeys"
         android:icon="@drawable/ic_train_black_24dp"
         app:showAsAction="ifRoom"
         android:title="@string/trajets" />
 
     <item
-        android:id="@+id/navigation_ticket"
+        android:id="@+id/navigation_tickets"
         android:icon="@drawable/ic_ticket_black_24dp"
         app:showAsAction="ifRoom"
         android:title="@string/billet" />

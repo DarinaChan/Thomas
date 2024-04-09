@@ -12,32 +12,33 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ActivityNavBar extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener {
-    private int currentSelectedItemId;
-    private BottomNavigationView bottomNavigationView;
     private FragmentManager fm;
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_nav_bar);
-        bottomNavigationView = findViewById(R.id.nav_view);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
 
         fm = getSupportFragmentManager();
 
-        currentSelectedItemId = bottomNavigationView.getMenu().getItem(0).getItemId();
+        int currentSelectedItemId = bottomNavigationView.getMenu().getItem(0).getItemId();
         bottomNavigationView.setOnItemSelectedListener(this);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int clickedItemId = menuItem.getItemId();
-        if (clickedItemId == R.id.navigation_train) {
+        if (clickedItemId == R.id.navigation_journeys) {
+            fm.beginTransaction().replace(frame_fragment_container, new FragmentJourneys()).commit();
             return true;
-        }  else if (clickedItemId == R.id.navigation_ticket) {
+        }  else if (clickedItemId == R.id.navigation_tickets) {
+            fm.beginTransaction().replace(frame_fragment_container, new FragmentTickets()).commit();
             return true;
         } else if (clickedItemId == R.id.navigation_report) {
-            fm.beginTransaction().replace(frame_fragment_container, new FragmentIncidentReporting()).commit();
+            fm.beginTransaction().replace(frame_fragment_container, new FragmentReport()).commit();
             return true;
         } else if (clickedItemId == R.id.navigation_profile) {
+            fm.beginTransaction().replace(frame_fragment_container, new FragmentProfile()).commit();
             return true;
         }
         return false;

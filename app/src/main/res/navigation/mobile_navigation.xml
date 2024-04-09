@@ -3,26 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_train">
+    app:startDestination="@+id/navigation_journeys">
 
     <fragment
-        android:id="@+id/navigation_train"
-        android:name="edu.thomas.FragmentTrain"
+        android:id="@+id/navigation_journeys"
+        android:name="edu.thomas.FragmentJourneys"
         android:label="@string/trajets"
-        tools:layout="@layout/fragment_train" />
+        tools:layout="@layout/fragment_journeys" />
 
     <fragment
-        android:id="@+id/navigation_ticket"
-        android:name="edu.thomas.FragmentTicket"
+        android:id="@+id/navigation_tickets"
+        android:name="edu.thomas.FragmentTickets"
         android:label="@string/billet"
-        tools:layout="@layout/fragment_ticket" />
+        tools:layout="@layout/fragment_tickets" />
 
     <fragment
         android:id="@+id/navigation_report"
         android:name="edu.thomas.FragmentReport"
         android:label="@string/signaler"
         tools:layout="@layout/fragment_report" />
-
 
     <fragment
         android:id="@+id/navigation_profile"
