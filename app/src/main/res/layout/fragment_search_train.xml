@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:width="350dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="350sp"
+        android:textColor="@color/dark_grey"
+        android:textAlignment="viewStart"
+        android:layout_marginBottom="24sp"
+        android:text="@string/champs_obligatoire" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/departure"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:height="64dp"
+        android:minWidth="350dp"
+        android:paddingBottom="8sp"
+        android:hint="@string/gare_de_depart">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/arrival"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:height="64dp"
+        android:minWidth="350dp"
+        android:paddingBottom="24sp"
+        android:hint="@string/gare_d_arrivee">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/abandonedLuggage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="350dp"
+        android:height="64dp"
+        android:text="@string/rechercher_mon_trajet"
+        app:layout_constraintLeft_toLeftOf="parent" />
+</LinearLayout>
