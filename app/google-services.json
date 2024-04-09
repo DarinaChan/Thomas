@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "486454438792",
+    "project_id": "thomasthetrain-93e6e",
+    "storage_bucket": "thomasthetrain-93e6e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486454438792:android:353277bd1abed04a66283d",
+        "android_client_info": {
+          "package_name": "edu.thomas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCstfcefZWzfVR0Nq6NoDNY6xekPwrKU0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
