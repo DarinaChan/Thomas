@@ -46,7 +46,7 @@ import edu.thomas.service.DatabaseService;
 import edu.thomas.users.Train;
 import edu.thomas.users.User;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements CallbackActivity {
     private final int REQUEST_CALENDAR_PERMISSION = 1;
     public final String TAG = "Thomas" + getClass().getSimpleName();
     public static final String CHANNEL_ID = "Notification channel";
@@ -190,5 +190,9 @@ public class MainActivity extends AppCompatActivity {
             fr = (FragmentReport) fragments.get(0);
         }
         return fr;
+    }
+    @Override
+    public void filter(int value) {
+
     }
 }
