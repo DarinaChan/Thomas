@@ -5,24 +5,24 @@
         android:id="@+id/navigation_journeys"
         android:icon="@drawable/ic_train_black_24dp"
         app:showAsAction="ifRoom"
-        android:title="@string/trajets" />
+        android:title="@string/journeys" />
 
     <item
         android:id="@+id/navigation_tickets"
         android:icon="@drawable/ic_ticket_black_24dp"
         app:showAsAction="ifRoom"
-        android:title="@string/billet" />
+        android:title="@string/tickets" />
 
     <item
         android:id="@+id/navigation_report"
         android:icon="@drawable/ic_report_black_24dp"
         app:showAsAction="ifRoom"
-        android:title="@string/signaler" />
+        android:title="@string/report" />
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile_black_24dp"
         app:showAsAction="ifRoom"
-        android:title="@string/profil" />
+        android:title="@string/profile" />
 
 </menu>

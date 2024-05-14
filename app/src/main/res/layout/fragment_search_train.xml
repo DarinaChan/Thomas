@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:width="350dp"
-    android:layout_marginTop="32dp"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
@@ -16,7 +15,7 @@
         android:textColor="@color/dark_grey"
         android:textAlignment="viewStart"
         android:layout_marginBottom="24sp"
-        android:text="@string/champs_obligatoire" />
+        android:text="@string/required_fields" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/departure"
@@ -26,7 +25,7 @@
         android:height="64dp"
         android:minWidth="350dp"
         android:paddingBottom="8sp"
-        android:hint="@string/gare_de_depart">
+        android:hint="@string/departure_station">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -40,18 +39,19 @@
         android:height="64dp"
         android:minWidth="350dp"
         android:paddingBottom="24sp"
-        android:hint="@string/gare_d_arrivee">
+        android:hint="@string/arrival_station">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:textAllCaps="false"
         android:id="@+id/abandonedLuggage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="350dp"
         android:height="64dp"
-        android:text="@string/rechercher_mon_trajet"
+        android:text="@string/search_my_journey"
         app:layout_constraintLeft_toLeftOf="parent" />
 </LinearLayout>

@@ -5,52 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:width="350dp"
-    android:layout_marginTop="32dp"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/scheduleDisruption"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:width="350dp"
-        android:height="64dp"
-        android:text="@string/perturbation_des_horaires"
+        android:layout_margin="8dp"
+        style="?attr/materialCardViewOutlinedStyle"
+        app:strokeWidth="1dp"
         app:strokeColor="@color/blue"
-        app:backgroundTint="@color/white"
-        app:layout_constraintLeft_toLeftOf="parent" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/suspiciousBehavior"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="350dp"
-        android:height="64dp"
-        android:text="@string/comportement_suspect"
-        app:strokeColor="@color/blue"
-        app:backgroundTint="@color/white"
-        app:layout_constraintLeft_toLeftOf="parent" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/abandonedLuggage"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="350dp"
-        android:height="64dp"
-        android:text="@string/baggage_abandonne"
-        app:strokeColor="@color/blue"
-        app:backgroundTint="@color/white"
-        app:layout_constraintLeft_toLeftOf="parent" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/technicalProblem"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="350dp"
-        android:height="64dp"
-        android:text="@string/probleme_technique"
-        app:strokeColor="@color/blue"
-        app:backgroundTint="@color/white"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:cardBackgroundColor="@color/light_blue"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Interface pour signaler un incident"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 </LinearLayout>

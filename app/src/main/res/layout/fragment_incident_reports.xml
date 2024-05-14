@@ -7,20 +7,6 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_bar"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:height="64dp"
-        android:paddingBottom="8sp"
-        app:startIconDrawable="@drawable/ic_search_24dp"
-        android:hint="@string/search_for_a_journey">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,10 +25,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Interface pour mes trajets"
+                android:text="@string/incident_details"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
 </LinearLayout>
