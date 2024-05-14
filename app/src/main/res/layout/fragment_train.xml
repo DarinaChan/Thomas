@@ -3,20 +3,115 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:backgroundTint="@color/gray"
     android:layout_height="match_parent"
     tools:context=".ui.train.TrainFragment">
 
     <TextView
-        android:id="@+id/text_train"
-        android:layout_width="match_parent"
+        android:id="@+id/champObligatoire"
+        android:layout_width="wrap_content"
+        android:layout_margin="15dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/champs_obligatoire"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+
+        android:id="@+id/champDepart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/champObligatoire">
+
+        <ImageView
+            android:id="@+id/imageViewDepart"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:src="@drawable/grey_train"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextDepart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextDepart" />
+
+        <EditText
+            android:id="@+id/editTextDepart"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Depart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDepart"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:id="@+id/champArrivee"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/champDepart">
+
+        <ImageView
+            android:id="@+id/imageViewArrivee"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:src="@drawable/grey_train"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextArrivee"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextArrivee" />
+
+        <EditText
+            android:id="@+id/editTextArrivee"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Arrivee"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewArrivee"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bouton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/champArrivee">
+
+        <Button
+            android:id="@+id/dateButton"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="30dp"
+            android:onClick="showDatePickerDialog"
+            android:text="Date"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/profileVoyeur"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="30dp"
+            android:onClick="showDatePickerDialog"
+            android:text="Profil du voyageur"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listVue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bouton" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

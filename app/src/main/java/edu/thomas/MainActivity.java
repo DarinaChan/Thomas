@@ -12,7 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import edu.thomas.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CallbackActivity {
 
     private ActivityMainBinding binding;
 
@@ -34,4 +34,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    @Override
+    public void filter(int value) {
+
+    }
 }
