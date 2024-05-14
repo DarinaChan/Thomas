@@ -3,6 +3,7 @@ package edu.thomas.ui.train;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,15 @@ import edu.thomas.databinding.FragmentTrainBinding;
 import edu.thomas.model.train.TrainInfo;
 
 
-public class TrainFragment extends Fragment implements bulleHoraireListener   {
+public class TrainFragment extends Fragment {
 
     private FragmentTrainBinding binding;
     private CallbackActivity callbackActivity;
+    private final String TAG = "THOMAS "+getClass().getSimpleName();
 
+
+
+    public TrainFragment(){};
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -38,12 +43,20 @@ public class TrainFragment extends Fragment implements bulleHoraireListener   {
     }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentTrainBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        View root = inflater.inflate(R.layout.fragment_train,container,false);
+        ArrayList<TrainInfo>  trainInfos = new ArrayList<>();
+        trainInfos.add(new TrainInfo("11H41", "15h10", "Antibes", "Monaco", "30min", "TER"));
+        trainInfos.add(new TrainInfo("11H41", "15h10", "Monaco", "Antibes", "30min", "TER", true,
+                "Train en retard de 20 min ", "12h00", "16h00"));
+
+        bulleHoraireAdapter adapter = new bulleHoraireAdapter(callbackActivity, trainInfos);
+        Log.d(TAG, "onCreateView: "+trainInfos + " lv " +root.findViewById(R.id.listVue) + " ad "+ adapter  );
+        ((ListView)root.findViewById(R.id.listVue)).setAdapter(adapter);
+
         return root;
     }
 
-
+/*
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         ArrayList<TrainInfo> trainInfos;
@@ -54,7 +67,8 @@ public class TrainFragment extends Fragment implements bulleHoraireListener   {
         bulleHoraireAdapter bl = new bulleHoraireAdapter(callbackActivity,trainInfos);
         ListView lv = view.findViewById(R.id.listVue);
         lv.setAdapter(bl);
-    }
+
+
 
     @Override
     public void onClickNom(TrainInfo item, TextView display) {
@@ -65,10 +79,10 @@ public class TrainFragment extends Fragment implements bulleHoraireListener   {
         builder.setNeutralButton("OK",null);
         builder.show();
     }
-
+*/
     @Override
     public Context getContext() {
-        return requireActivity().getApplicationContext();
+        return getActivity().getApplicationContext();
     }
 
 //todo a rename  aussi verifié que c'est le bon
