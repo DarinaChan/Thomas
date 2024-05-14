@@ -7,20 +7,19 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/search_train"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_bar"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:width="350dp"
         android:height="64dp"
-        android:text="@string/rechercher_un_trajet"
-        android:textColor="@color/dark_grey"
-        app:backgroundTint="@color/white"
-        app:icon="@drawable/ic_search_24dp"
-        app:iconTint="@color/dark_grey"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
+        android:paddingBottom="8sp"
+        app:startIconDrawable="@drawable/ic_search_24dp"
+        android:hint="@string/search_for_a_journey">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -40,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mes_trajet"
+                android:text="Interface pour mes trajets"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
         </LinearLayout>

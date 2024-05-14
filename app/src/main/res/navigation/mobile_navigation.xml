@@ -9,24 +9,24 @@
     <fragment
         android:id="@+id/navigation_journeys"
         android:name="edu.thomas.FragmentJourneys"
-        android:label="@string/trajets"
+        android:label="@string/my_journeys"
         tools:layout="@layout/fragment_journeys" />
 
     <fragment
         android:id="@+id/navigation_tickets"
         android:name="edu.thomas.FragmentTickets"
-        android:label="@string/billet"
+        android:label="@string/import_a_ticket"
         tools:layout="@layout/fragment_tickets" />
 
     <fragment
         android:id="@+id/navigation_report"
         android:name="edu.thomas.FragmentReport"
-        android:label="@string/signaler"
+        android:label="@string/report_an_incident"
         tools:layout="@layout/fragment_report" />
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="edu.thomas.FragmentProfile"
-        android:label="@string/mon_profil"
+        android:label="@string/my_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
