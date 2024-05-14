@@ -18,7 +18,7 @@ import edu.thomas.R;
 import edu.thomas.model.train.TrainInfo;
 import edu.thomas.model.train.TrainInfoList;
 
-public class bulleHoraireAdapter extends BaseAdapter implements bulleHoraireListener {
+public class bulleHoraireAdapter extends BaseAdapter {
     private final String TAG = "THOMAS "+getClass().getSimpleName();
 
     private final CallbackActivity activity;
@@ -105,13 +105,4 @@ public class bulleHoraireAdapter extends BaseAdapter implements bulleHoraireList
         return layoutItem;
     }
 
-    @Override
-    public void onClickNom(TrainInfo item, TextView display) {
-
-    }
-
-    @Override
-    public Context getContext() {
-        return null;
-    }
 }
