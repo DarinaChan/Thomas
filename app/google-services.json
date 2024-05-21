@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "231891393440",
+    "project_id": "thomas-e8196",
+    "storage_bucket": "thomas-e8196.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231891393440:android:9135660c6160ccf49ee2c5",
+        "android_client_info": {
+          "package_name": "edu.thomas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaDtTWwk2Q7EjowMd5wjwrXKlsi-TXN1g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
