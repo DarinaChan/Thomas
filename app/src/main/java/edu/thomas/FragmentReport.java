@@ -26,6 +26,7 @@ public class FragmentReport extends Fragment {
         Spinner spinner = rootView.findViewById(R.id.incident_spinner);
 
         List<String> incidents = new ArrayList<>();
+        incidents.add("Sélectionner une catégorie...");
         incidents.add("Pick pocket");
         incidents.add("Passager dangereux");
         incidents.add("Train en retard");
