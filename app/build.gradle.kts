@@ -55,6 +55,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.google.firebase:firebase-database:20.0.5")
     implementation("com.google.firebase:firebase-core:21.1.1")
+    implementation("com.google.firebase:firebase-messaging:32.8.1")
     // TODO: Add the dependencies for Firebase products you want to use
     // When using the BoM, don't specify versions in Firebase dependencies
     // https://firebase.google.com/docs/android/setup#available-libraries

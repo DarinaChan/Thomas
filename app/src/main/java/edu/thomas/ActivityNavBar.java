@@ -1,7 +1,6 @@
 package edu.thomas;
 
 import static edu.thomas.IPictureActivity.REQUEST_CAMERA;
-import static edu.thomas.R.id.frame_fragment_container;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
