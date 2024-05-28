@@ -74,6 +74,7 @@ public class FragmentReport extends Fragment {
                 TextInputEditText incidentDesc = rootView.findViewById(R.id.incident_desc);
                 incident_desc = incidentDesc.getText().toString();
                 sendIncident(); // Send the incident to the db
+                System.out.println("test");
                 incidentDesc.setText(""); //Reset the text
                 spinner.setSelection(0); // Reset the spinner
 
