@@ -31,12 +31,17 @@ import java.security.Permission;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.thomas.model.incident.Incident;
+import edu.thomas.model.incident.IncidentFactory;
+import edu.thomas.model.incident.TypeOfIncident;
+
 public class FragmentReport extends Fragment {
     Database db = new Database();
     int spinnerPosition = 0;
     String incident_desc;
 
     ImageView imageView;
+    IncidentFactory facto = new IncidentFactory();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,11 +61,10 @@ public class FragmentReport extends Fragment {
         });
 
         List<String> incidents = new ArrayList<>();
-        incidents.add("Sélectionner une catégorie...");
-        incidents.add("Pick pocket");
-        incidents.add("Passager dangereux");
-        incidents.add("Train en retard");
-        incidents.add("Train à l heure");
+        incidents.add("-- Selectionnez une catégorie --");
+        for (TypeOfIncident ty : TypeOfIncident.values()){
+            incidents.add(ty.getDescription());
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, incidents);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -73,11 +77,15 @@ public class FragmentReport extends Fragment {
             public void onClick(View v) {
                 TextInputEditText incidentDesc = rootView.findViewById(R.id.incident_desc);
                 incident_desc = incidentDesc.getText().toString();
-                sendIncident(); // Send the incident to the db
-                System.out.println("test");
-                incidentDesc.setText(""); //Reset the text
-                spinner.setSelection(0); // Reset the spinner
-
+                if (spinnerPosition != 0) {
+                    sendIncident(); // Send the incident to the db
+                    showPopup("Incident envoyé avec succès !");
+                    incidentDesc.setText(""); //Reset the text
+                    spinner.setSelection(0); // Reset the spinner
+                }
+                else{
+                    showPopup("Veuillez choisir une catégorie");
+                }
             }
         });
 
@@ -85,8 +93,8 @@ public class FragmentReport extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 spinnerPosition = position; //get the position of the spinner
-                if (incidents.get(position).equals("Train à l heure")) { // Un train n'est jamais à l'heure
-                    showPopup();
+                if (position == TypeOfIncident.TrainOnTime.ordinal() + 1) { // Un train n'est jamais à l'heure
+                    showPopup("Un train n'est jamais à l'heure !");
                     spinner.setSelection(0); //Reset the spinner
                 }
             }
@@ -99,13 +107,15 @@ public class FragmentReport extends Fragment {
 
         return rootView;
     }
-    private void showPopup() {
-        Toast.makeText(getContext(), "Un train n'est jamais à l'heure !", Toast.LENGTH_LONG).show();
+    private void showPopup(String text) {
+        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
     }
     public void sendIncident(){
         System.out.println(FirebaseDatabase.getInstance());
-        Incident incident = new Incident(db.getIdForIncident(),spinnerPosition,incident_desc);
+        Incident incident = facto.createIncident(spinnerPosition,incident_desc).get();
+        System.out.println(incident);
         db.addIncident(incident);
+
     }
 
     public void takePicture() {

@@ -14,6 +14,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Collection;
 import java.util.List;
 
+import edu.thomas.model.incident.Incident;
+
 public class Database {
     FirebaseFirestore db;
     public Database(){
@@ -26,18 +28,8 @@ public class Database {
     public void addIncident(Incident i){
         db.collection("incidents")
                 .add(i)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.w("DocumentSnapshot added with ID: " , documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Error adding document", e);
-                    }
-                });
+                .addOnSuccessListener(documentReference -> System.out.println("DocumentSnapshot added with ID: "  +  documentReference.getId()))
+                .addOnFailureListener(e -> System.out.println("Error adding document" + e));
     }
     public List<Incident> getIncidents(){
         return db.collection("incidents").get().getResult().toObjects(Incident.class);
