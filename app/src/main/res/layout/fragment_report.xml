@@ -93,11 +93,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"
+            android:id="@+id/incident_desc"
             android:hint="Description de l'incident"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/send_button"
+        android:id="@+id/addIncident"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="20dp"
