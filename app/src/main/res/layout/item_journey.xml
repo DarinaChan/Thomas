@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pb_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="8dp"
+        style="?attr/materialCardViewOutlinedStyle"
+        app:strokeWidth="1dp"
+        app:cardBackgroundColor="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="8dp">
+
+            <ImageView
+                android:id="@+id/imgTrain"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="16dp"
+                android:src="@drawable/logo_ter"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/imgTrain"
+                android:text="Mardi 21 mai"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                />
+
+            <!-- Departure -->
+
+            <TextView
+                android:id="@+id/departureDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/imgTrain"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="11h14" />
+
+            <TextView
+                android:id="@+id/departureStation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/imgTrain"
+                app:layout_constraintLeft_toRightOf="@id/departureDate"
+                android:text="Antibes" />
+
+            <!-- Arrival -->
+
+            <TextView
+                android:id="@+id/arrivalDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/departureDate"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="11h40" />
+
+            <TextView
+                android:id="@+id/arrivalStation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/departureStation"
+                app:layout_constraintLeft_toRightOf="@id/arrivalDate"
+                android:text="Monaco" />
+
+            <!-- Other button and text-->
+
+            <ImageButton
+                android:id="@+id/addEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_calendar_24dp"
+                android:contentDescription="@string/add_ticket"
+                app:layout_constraintBottom_toBottomOf="@id/arrivalDate"
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="#FFFFFF"
+                app:tint="@color/blue" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                style="?attr/materialCardViewOutlinedStyle"
+                app:layout_constraintTop_toBottomOf="@id/arrivalDate"
+                app:layout_constraintRight_toRightOf="parent"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/blue"
+                app:cardBackgroundColor="@color/light_blue"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Il y a un incident"
+                    android:layout_margin="8dp"
+                    />
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
