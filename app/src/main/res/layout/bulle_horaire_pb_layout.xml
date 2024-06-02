@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pb_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:background="@drawable/rounded_background">
+    android:background="@drawable/rounded_background_white">
 
     <!--TODO a rendre barré -->
     <TextView
@@ -100,7 +101,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="@drawable/rounded_background"
+        android:background="@drawable/rounded_background_white"
         android:backgroundTint="@color/blueWO"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

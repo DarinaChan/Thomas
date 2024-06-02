@@ -1,26 +1,5 @@
 package edu.thomas;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import static edu.thomas.IPictureActivity.REQUEST_CAMERA;
-import static edu.thomas.IPictureActivity.REQUEST_GALLERY;
-
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Toast;

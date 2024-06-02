@@ -1,31 +1,48 @@
 package edu.thomas.ui.train;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.thomas.CallbackActivity;
 import edu.thomas.R;
 import edu.thomas.databinding.FragmentTrainBinding;
+import edu.thomas.internetRequest.HttpAsyncGet;
+import edu.thomas.internetRequest.PostExecuteActivity;
+import edu.thomas.model.train.SncfRequest;
 import edu.thomas.model.train.TrainInfo;
+import edu.thomas.model.train.TrainInfoList;
+import edu.thomas.model.train.TrainStationMap;
 
 
 public class TrainFragment extends Fragment {
 
     private FragmentTrainBinding binding;
     private CallbackActivity callbackActivity;
+    AutoCompleteTextView editTextDepart;
+    AutoCompleteTextView editTextArrive;
     private final String TAG = "THOMAS "+getClass().getSimpleName();
 
 
@@ -50,25 +67,79 @@ public class TrainFragment extends Fragment {
                 "Train en retard de 20 min ", "12h00", "16h00"));
 
         bulleHoraireAdapter adapter = new bulleHoraireAdapter(callbackActivity, trainInfos);
-        Log.d(TAG, "onCreateView: "+trainInfos + " lv " +root.findViewById(R.id.listVue) + " ad "+ adapter  );
         ((ListView)root.findViewById(R.id.listVue)).setAdapter(adapter);
+        Button datePicker = root.findViewById(R.id.date_picker);
+        Button timePicker = root.findViewById(R.id.time_picker);
+        TimeManagement tm = new TimeManagement(getActivity()) {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                // Les mois commencent à 0 en Java, donc il faut ajouter 1
+                month = month + 1;
+                // Utiliser String.format pour s'assurer que chaque composant a deux chiffres
+                String formattedDay = String.format("%02d", dayOfMonth);
+                String formattedMonth = String.format("%02d", month);
+                // Mettre à jour le TextView avec la date formatée
+                datePicker.setText(formattedDay + "/" + formattedMonth + "/" + year);            }
 
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                // Utiliser String.format pour s'assurer que chaque composant a deux chiffres
+                String formattedHour = String.format("%02d", hourOfDay);
+                String formattedMinute = String.format("%02d", minute);
+                // Mettre à jour le TextView avec l'heure formatée
+                timePicker.setText(formattedHour + ":" + formattedMinute);
+
+            }
+
+            @Override
+            public void onClick(View v) {
+                if(v== datePicker) showDatePickerDialog();
+                else showTimePickerDialog();
+            }
+        };
+        datePicker.setOnClickListener(tm);
+        timePicker.setOnClickListener(tm);
+
+        ImageButton searchButton = root.findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SncfRequest detail = null;
+                try {
+                    detail = new SncfRequest(editTextArrive.getText().toString(),editTextDepart.getText().toString(),datePicker.getText().toString()+"-"+timePicker.getText().toString());
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                HttpAsyncGet<TrainInfo> request = new HttpAsyncGet<>(detail, TrainInfo.class, new PostExecuteActivity() {
+                    @Override
+                    public void onPostExecute(List itemList) {
+                        TrainInfoList.getInstance();
+
+                    }
+
+                    @Override
+                    public void runOnUiThread(Runnable runable) {
+
+                    }
+                },null);
+
+            }
+        });
         return root;
     }
 
-/*
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ArrayList<TrainInfo> trainInfos;
-        trainInfos = new ArrayList<>();
-        trainInfos.add(new TrainInfo("11H41", "15h10", "Antibes", "Monaco", "30min", "TER"));
-        trainInfos.add(new TrainInfo("11H41", "15h10", "Monaco", "Antibes", "30min", "TER", true,
-                "Train en retard de 20 min ", "12h00", "16h00"));
-        bulleHoraireAdapter bl = new bulleHoraireAdapter(callbackActivity,trainInfos);
-        ListView lv = view.findViewById(R.id.listVue);
-        lv.setAdapter(bl);
+        super.onViewCreated(view, savedInstanceState);
+        editTextDepart = view.findViewById(R.id.editTextDepart);
+        editTextArrive  = view.findViewById(R.id.editTextArrivee);
 
+        ArrayAdapter listGare = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line,new ArrayList<>(TrainStationMap.getStationName()));
+        editTextArrive.setAdapter(listGare);
+        editTextDepart.setAdapter(listGare);
+    }
 
+    /*
 
     @Override
     public void onClickNom(TrainInfo item, TextView display) {
@@ -80,6 +151,8 @@ public class TrainFragment extends Fragment {
         builder.show();
     }
 */
+
+
     @Override
     public Context getContext() {
         return getActivity().getApplicationContext();

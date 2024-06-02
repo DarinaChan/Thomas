@@ -39,17 +39,17 @@ public class bulleHoraireAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return train.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return train.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -58,21 +58,12 @@ public class bulleHoraireAdapter extends BaseAdapter {
         View layoutItem;
         TrainInfo tr = train.get(position);
         Boolean incident= tr.getIncidents();
-       /* if(view == null){
-            if(incident){
+          if(incident){
                 layoutItem= inflater.inflate(R.layout.bulle_horaire_pb_layout, parent, false);
             }else {
                 layoutItem= inflater.inflate(R.layout.bulle_horaire_layout, parent, false);
             }
-        }else {
-            layoutItem=view;
-        }
-           */
-        if(view == null) {
-            layoutItem = inflater.inflate(R.layout.bulle_horaire_layout, parent, false);
-        }else{
-            layoutItem=view;
-        }
+
 
         TextView heureDepart = layoutItem.findViewById(R.id.heureDepart);
         TextView heureArrive = layoutItem.findViewById(R.id.heureArrivee);
@@ -80,7 +71,7 @@ public class bulleHoraireAdapter extends BaseAdapter {
         TextView gareArrive = layoutItem.findViewById(R.id.gareArrivé);
         TextView dureeTrajet =layoutItem.findViewById(R.id.dureeTrajet);
         ImageView imageTrain = layoutItem.findViewById(R.id.imgTrain);
-       /* if(incident){
+        if(incident){
             TextView nouvelleHeureDepart = layoutItem.findViewById(R.id.nouvelleHeureDepart);
             TextView nouvelleheureArrive = layoutItem.findViewById(R.id.nouvelleHeureArrivee);
             TextView texteIncident=  layoutItem.findViewById(R.id.textRetard);
@@ -92,7 +83,7 @@ public class bulleHoraireAdapter extends BaseAdapter {
                 nouvelleHeureDepart.setText(tr.getNouvelleHoraireDepart());
             }
             texteIncident.setText(tr.getDescIncidents());
-        }*/
+        }
 
         heureDepart.setText(tr.getHoraireDepart());
         heureArrive.setText(tr.getHoraireArrivee());
@@ -104,5 +95,8 @@ public class bulleHoraireAdapter extends BaseAdapter {
 
         return layoutItem;
     }
-
 }
+
+
+
+

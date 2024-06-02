@@ -13,6 +13,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -56,4 +57,9 @@ dependencies {
     implementation("com.google.firebase:firebase-core:21.1.1")
     implementation("com.google.firebase:firebase-messaging:24.0.0")
     implementation("com.google.firebase:firebase-firestore:25.0.0")
+
+    // Import Jackson
+    implementation ("com.fasterxml.jackson.core:jackson-databind:2.10.3")
+    implementation ("com.fasterxml.jackson.core:jackson-core:2.10.3")
+    implementation ("com.fasterxml.jackson.core:jackson-annotations:2.10.3")
 }
