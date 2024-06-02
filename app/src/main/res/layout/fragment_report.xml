@@ -4,6 +4,54 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:layout_weight="0.10"
+        android:layout_marginHorizontal="20dp">
+
+
+        <Spinner
+            android:id="@+id/incident_spinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.70"
+            android:layout_marginHorizontal="20dp"
+            >
+
+        </Spinner>
+
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            >
+
+        </ImageView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:layout_weight="0.10"
+        android:layout_marginHorizontal="20dp">
+
+
+        <Spinner
+            android:id="@+id/train_spinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.70"
+            android:layout_marginHorizontal="20dp"
+            >
+        </Spinner>
+
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -52,33 +100,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="0dp"
-        android:layout_weight="0.10"
-        android:layout_marginHorizontal="20dp">
 
-        <Spinner
-            android:id="@+id/incident_spinner"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.70"
-            android:layout_marginHorizontal="20dp"
-            >
-
-        </Spinner>
-
-        <ImageView
-            android:id="@+id/photo"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            >
-
-        </ImageView>
-
-    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/reference"

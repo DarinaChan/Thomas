@@ -1,4 +1,4 @@
-package edu.thomas;
+package edu.thomas.service;
 
 import android.app.NotificationManager;
 import android.content.Context;
@@ -16,6 +16,9 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import edu.thomas.MainActivity;
+import edu.thomas.R;
 
 public class NotificationService extends FirebaseMessagingService {
     public final String TAG = "Logs : " + getClass().getSimpleName();

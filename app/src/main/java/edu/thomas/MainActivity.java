@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,7 +22,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.Date;
+
 import edu.thomas.databinding.ActivityMainBinding;
+import edu.thomas.service.DatabaseService;
+import edu.thomas.users.Train;
+import edu.thomas.users.User;
 
 public class MainActivity extends AppCompatActivity {
     public final String TAG = "Thomas" + getClass().getSimpleName();
@@ -29,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private FragmentManager fm;
     private FragmentReport fr;
+    DatabaseService databaseService = new DatabaseService();
+    public User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +71,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Token = " + task.getResult());
             }
         });
+        // Add some basic informations in the db
+        /*
+        User basicUser = new User("Miguel", "Rodrigo");
+        Train basicTrain = new Train(new Date(),"Rouen","Lyon",databaseService.getIdForTrain());
+        currentUser = basicUser;
+        currentUser.addTrainToUser(basicTrain);
+        currentUser.addTrainToUser(basicTrain);
+    */
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

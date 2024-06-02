@@ -1,7 +1,7 @@
 package edu.thomas.model.incident;
 public class AccessIncident extends Incident {
-    public AccessIncident(TypeOfIncident type,String description){
-        super(type,description);
+    public AccessIncident(String trainId,TypeOfIncident type,String description){
+        super(trainId,type,description);
     }
     @Override
     public void notifyUsers(){
