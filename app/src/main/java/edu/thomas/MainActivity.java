@@ -1,5 +1,14 @@
 package edu.thomas;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import static edu.thomas.IPictureActivity.REQUEST_CAMERA;
 
 import android.app.NotificationChannel;
@@ -17,6 +26,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,6 +40,7 @@ import edu.thomas.users.Train;
 import edu.thomas.users.User;
 
 public class MainActivity extends AppCompatActivity {
+    private final int REQUEST_CALENDAR_PERMISSION = 1;
     public final String TAG = "Thomas" + getClass().getSimpleName();
     public static final String CHANNEL_ID = "Notification channel";
     private ActivityMainBinding binding;
@@ -41,8 +52,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestCalendarPermission();
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        edu.thomas.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Passing each menu ID as a set of Ids because each
@@ -94,6 +106,15 @@ public class MainActivity extends AppCompatActivity {
                     toast.show();
                 }
             }
+            case REQUEST_CALENDAR_PERMISSION: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted
+                    Toast.makeText(this, "Calendar permission granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Permission denied
+                    Toast.makeText(this, "Calendar permission is required to add events", Toast.LENGTH_SHORT).show();
+                }
+            }
             break;
         }
     }
@@ -105,6 +126,16 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK) {
                 fr.setImage((Bitmap) data.getExtras().get("data"));
             }
+        }
+    }
+
+    private void requestCalendarPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR},
+                    REQUEST_CALENDAR_PERMISSION);
         }
     }
 }

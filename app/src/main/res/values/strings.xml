@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Thomas</string>
+    <string name="train">Train</string>
     <string name="required_fields">* champs obligatoires</string>
+
     <!-- Login page -->
     <string name="email">E-mail</string>
     <string name="password">Mot de passe</string>
