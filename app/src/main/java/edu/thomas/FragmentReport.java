@@ -139,7 +139,7 @@ public class FragmentReport extends Fragment {
 
     public void takePicture() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        getActivity().startActivityForResult(intent, IPictureActivity.REQUEST_CAMERA);
+        requireActivity().startActivityForResult(intent, IPictureActivity.REQUEST_CAMERA);
     }
 
     public void setImage(Bitmap bitmap) {
