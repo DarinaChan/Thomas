@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Thomas</string>
-    <string name="train">Train</string>
+    <string name="train_logo">Logo du train</string>
     <string name="required_fields">* champs obligatoires</string>
 
     <!-- Login page -->
@@ -12,7 +12,7 @@
     <string name="guest">Continuer en tant qu\'invité</string>
 
     <!-- Menu -->
-    <string name="journeys">Trajets</string>
+    <string name="train">Trajets</string>
     <string name="tickets">Billets</string>
     <string name="report">Signaler</string>
     <string name="profile">Profil</string>
@@ -24,7 +24,7 @@
     <string name="mon_profil">Mon profil</string>
 
     <!-- Journey -->
-    <string name="my_journeys">Mes trajets</string>
+    <string name="my_train">Mes trajets</string>
     <string name="search_for_a_journey">Rechercher un trajet</string>
     <string name="search_my_journey">Rechercher mon trajet</string>
     <string name="chose_a_journey">Choisir un trajet</string>

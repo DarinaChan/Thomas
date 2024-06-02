@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_journeys">
+    app:startDestination="@+id/navigation_train">
 
     <!-- Root views -->
     <fragment
-        android:id="@+id/navigation_journeys"
-        android:name="edu.thomas.FragmentJourneys"
-        android:label="@string/my_journeys"
-        tools:layout="@layout/item_journey" />
+        android:id="@+id/navigation_train"
+        android:name="edu.thomas.FragmentTrain"
+        android:label="@string/my_train"
+        tools:layout="@layout/item_train" />
 
     <fragment
         android:id="@+id/navigation_tickets"
