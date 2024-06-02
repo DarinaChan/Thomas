@@ -1,11 +1,11 @@
 package edu.thomas.model.journey;
 
 public class Journey {
-    private String date;
-    private String departureStation;
-    private String arrivalStation;
-    private String departure;
-    private String arrival;
+    private final String date;
+    private final String departureStation;
+    private final String arrivalStation;
+    private final String departure;
+    private final String arrival;
 
     // Constructors, getters, and setters
     public Journey(String date, String departureStation, String arrivalStation, String departure, String arrival) {
