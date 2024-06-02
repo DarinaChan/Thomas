@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="50dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="horizontal"
+        android:gravity="end"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/username"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="20dp"
+            android:text="Miguel Rodrigo"/>
+
+        <ImageView
+            android:layout_height="match_parent"
+            android:layout_width="50dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:id="@+id/profile_picture"
+            android:src="@drawable/profile_picture"
+            android:contentDescription="@string/profile"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:textAllCaps="false"
+        android:id="@+id/informations"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:text="@string/your_information"
+        app:strokeColor="@color/blue"
+        app:backgroundTint="@color/white" />
+    <com.google.android.material.button.MaterialButton
+        android:textAllCaps="false"
+        android:id="@+id/notifications"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:text="@string/notifications"
+        app:strokeColor="@color/blue"
+        app:backgroundTint="@color/white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:textAllCaps="false"
+        android:id="@+id/advanced_settings"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:text="@string/advanced_settings"
+        app:strokeColor="@color/blue"
+        app:backgroundTint="@color/white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:textAllCaps="false"
+        android:id="@+id/deconnection"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:backgroundTint="@color/red"
+        android:text="@string/delete_my_profile"
+        android:layout_marginBottom="10dp"
+        />
+</LinearLayout>

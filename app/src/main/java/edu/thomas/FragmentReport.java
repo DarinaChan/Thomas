@@ -3,6 +3,7 @@ package edu.thomas;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -56,8 +56,8 @@ public class FragmentReport extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_report, container, false);
         imageView = rootView.findViewById(R.id.photo);
         Spinner spinner = rootView.findViewById(R.id.incident_spinner);
-        ImageButton cameraButton = rootView.findViewById(R.id.camera_button);
-        cameraButton.setOnClickListener(view -> {
+
+        rootView.findViewById(R.id.camera_button).setOnClickListener(view -> {
             if(ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
                 ActivityCompat.requestPermissions(getActivity(), new String[] {android.Manifest.permission.CAMERA}, IPictureActivity.REQUEST_CAMERA);
             }
@@ -68,6 +68,22 @@ public class FragmentReport extends Fragment {
 
         Spinner trainSpinner = rootView.findViewById(R.id.train_spinner);
         fetchTrainNames(trainSpinner);
+
+        rootView.findViewById(R.id.gallery_button).setOnClickListener(view -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_DENIED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.READ_MEDIA_IMAGES}, IPictureActivity.REQUEST_GALLERY);
+                } else { // Permission still granted
+                    openGallery();
+                }
+            } else {
+                if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, IPictureActivity.REQUEST_GALLERY);
+                } else { // Permission still granted
+                    openGallery();
+                }
+            }
+        });
 
         List<String> incidents = new ArrayList<>();
         incidents.add("-- Selectionnez une catégorie --");
@@ -138,7 +154,12 @@ public class FragmentReport extends Fragment {
 
     public void takePicture() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        getActivity().startActivityForResult(intent, IPictureActivity.REQUEST_CAMERA);
+        requireActivity().startActivityForResult(intent, IPictureActivity.REQUEST_CAMERA);
+    }
+
+    public void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        requireActivity().startActivityForResult(intent, IPictureActivity.REQUEST_GALLERY);
     }
 
     public void setImage(Bitmap bitmap) {
