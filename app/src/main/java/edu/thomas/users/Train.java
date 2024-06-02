@@ -58,7 +58,7 @@ public class Train {
         this.departureWhere = departureWhere;
         this.arrivalWhere = arrivalWhere;
         this.trainId = trainId;
-        this.trainName = departureWhere + "-" + arrivalWhere + departureAt;
+        this.trainName = departureWhere + "-" + arrivalWhere + " " +  departureAt;
         databaseService.addTrain(this);
     }
     public Train(){}

@@ -27,6 +27,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edu.thomas.model.incident.Incident;
@@ -85,15 +86,16 @@ public class FragmentReport extends Fragment {
             public void onClick(View v) {
                 TextInputEditText incidentDesc = rootView.findViewById(R.id.incident_desc);
                 incident_desc = incidentDesc.getText().toString();
-                if (spinnerPosition != 0) {
+                if ((spinnerPosition != 0) && (trainSpinnerPosition !=0)) {
                     sendIncident(); // Send the incident to the db
                     showPopup("Incident envoyé avec succès !");
                     incidentDesc.setText(""); //Reset the text
                     spinner.setSelection(0); // Reset the spinner
                     trainSpinner.setSelection(0);
+                    addTrainToUser();
                 }
                 else{
-                    showPopup("Veuillez choisir une catégorie");
+                    showPopup(spinnerPosition != 0 ?"Veuillez choisir une catégorie":"Veuillez choisir le trajet correspondant");
                 }
             }
         });
@@ -101,7 +103,7 @@ public class FragmentReport extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 spinnerPosition = position; //get the position of the spinner
-                if (position == TypeOfIncident.TrainOnTime.ordinal() + 1) { // Un train n'est jamais à l'heure
+                if (spinnerPosition == TypeOfIncident.TrainOnTime.ordinal() + 1) { // Un train n'est jamais à l'heure
                     showPopup("Un train n'est jamais à l'heure !");
                     spinner.setSelection(0); //Reset the spinner
                 }
@@ -144,17 +146,30 @@ public class FragmentReport extends Fragment {
         imageView.setImageBitmap(bitmap);
     }
     public void fetchTrainNames(Spinner trainSpinner) {
-        db.getUsers(new FirestoreCallback() {
+        db.getMiguel(new FirestoreCallback() {
             @Override
-            public void onUserCallback(List<User> userList) {
-                if (!userList.isEmpty()) {
-                    trains = userList.get(0).getTrains();
+            public void onMiguelCallback(User user) {
+                if (user != null) {
+                    trains = user.getTrains();
                     List<String> trainNames = new ArrayList<>();
-                    trainNames.add("-- Sélectionnez un trajet--");
+                    trainNames.add("--Sélectionnez un trajet--");
                     for (Train t : trains) {
                         trainNames.add(t.getTrainName());
                     }
                     updateUIWithTrainNames(trainNames,trainSpinner);
+                }
+            }
+        });
+    }
+    public void addTrainToUser() {
+        db.getMiguel(new FirestoreCallback() {
+            @Override
+            public void onMiguelCallback(User user) {
+                if (user != null) {
+                    Train basicTrain = new Train(new Date(),"Prout","Marseille",db.getIdForTrain());
+                    user.addTrainToUser(basicTrain);
+                    db.addTrain(basicTrain);
+                    db.deleteAndReAddUser(user);
                 }
             }
         });

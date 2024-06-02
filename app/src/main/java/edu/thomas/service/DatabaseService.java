@@ -3,14 +3,19 @@ package edu.thomas.service;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import edu.thomas.model.incident.Incident;
@@ -44,40 +49,72 @@ public class DatabaseService {
         db.collection("users")
                 .add(u)
                 .addOnSuccessListener(documentReference -> {
-                    u.setId(documentReference.getId());
                     System.out.println("DocumentSnapshot added with ID: " + documentReference.getId());
                 })
                 .addOnFailureListener(e -> System.out.println("Error adding document: " + e));
     }
-    public void getUsers(final FirestoreCallback firestoreCallback) {
-        db.collection("users")
+    public void getMiguel(final FirestoreCallback listener) {
+        db.collection("users").document("ItqhRjzL6e1gNvUkz8Tj")
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<User> userList = new ArrayList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                User user = document.toObject(User.class);
-                                userList.add(user);
-                            }
-                            firestoreCallback.onUserCallback(userList);
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            // Document exists, map it to a User object
+                            User user = documentSnapshot.toObject(User.class);
+                            listener.onMiguelCallback(user);
                         } else {
-                            System.out.println("Error getting documents: " + task.getException());
+                            // Document does not exist
+                            listener.onMiguelCallback(null);
                         }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.err.println("Error getting user: " + e.getMessage());
                     }
                 });
     }
-
     public void addTrain(Train t){
         db.collection("trains")
                 .add(t)
                 .addOnSuccessListener(documentReference -> System.out.println("DocumentSnapshot added with ID: "  +  documentReference.getId()))
                 .addOnFailureListener(e -> System.out.println("Error adding document" + e));
     }
-    public List<Train> getTrains(){
-        return db.collection("trains").get().getResult().toObjects(Train.class);
+    public void deleteAndReAddUser(User newData) {
+        String userId = "ItqhRjzL6e1gNvUkz8Tj";
+        DocumentReference userRef = db.collection("users").document(userId);
+        userRef.delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("User successfully deleted!");
+
+                        // Re-add the user with new data
+                        userRef.set(newData)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        System.out.println("User successfully re-added!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        System.err.println("Error re-adding user: " + e.getMessage());
+                                    }
+                                });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.err.println("Error deleting user: " + e.getMessage());
+                    }
+                });
     }
+
 /*
     public Optional<Train> getTrainById(String trainId){
         for (Train t : getTrains()){

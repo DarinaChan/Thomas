@@ -5,5 +5,5 @@ import java.util.List;
 import edu.thomas.users.User;
 
 public interface FirestoreCallback {
-    void onUserCallback(List<User> userList);
+    void onMiguelCallback(User user);
 }

@@ -72,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         // Add some basic informations in the db
-        /*
+/*
         User basicUser = new User("Miguel", "Rodrigo");
         Train basicTrain = new Train(new Date(),"Rouen","Lyon",databaseService.getIdForTrain());
         currentUser = basicUser;
         currentUser.addTrainToUser(basicTrain);
         currentUser.addTrainToUser(basicTrain);
-    */
+*/
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
