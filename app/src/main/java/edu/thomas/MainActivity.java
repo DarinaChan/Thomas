@@ -13,13 +13,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import static edu.thomas.IPictureActivity.REQUEST_CAMERA;
+import static edu.thomas.IPictureActivity.REQUEST_GALLERY;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +37,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Date;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseService databaseService = new DatabaseService();
     public User currentUser;
     NavController navController;
+    FragmentReport fr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,15 +133,39 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             break;
+            case REQUEST_GALLERY: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "GALLERY authorization granted", Toast.LENGTH_LONG).show();
+                    getFragmentReport().openGallery();
+                } else {
+                    Toast.makeText(getApplicationContext(), "GALLERY authorization not granted", Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CAMERA) {
-            if(resultCode == RESULT_OK) {
-                getFragmentReport().setImage((Bitmap) Objects.requireNonNull(data.getExtras()).get("data"));
+
+        switch (requestCode) {
+            case REQUEST_CAMERA: {
+                if(resultCode == RESULT_OK) {
+                    getFragmentReport().setImage((Bitmap) Objects.requireNonNull(data.getExtras()).get("data"));
+                }
+                break;
+            }
+            case REQUEST_GALLERY: {
+                if(resultCode == RESULT_OK) {
+                    Uri selectedImage = data.getData();
+                    try {
+                        getFragmentReport().setImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                break;
             }
         }
     }
@@ -152,11 +181,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private FragmentReport getFragmentReport() {
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
-        if(navHostFragment == null) {
-            throw new IllegalStateException("Cannot find navHostFragment");
+        if(this.fr == null) {
+            NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
+            if(navHostFragment == null) {
+                throw new IllegalStateException("Cannot find navHostFragment");
+            }
+            List<Fragment> fragments = navHostFragment.getChildFragmentManager().getFragments();
+            fr = (FragmentReport) fragments.get(0);
         }
-        List<Fragment> fragments = navHostFragment.getChildFragmentManager().getFragments();
-        return (FragmentReport) fragments.get(0);
+        return fr;
     }
 }
