@@ -90,6 +90,15 @@ public class MainActivity extends AppCompatActivity {
                     toast.show();
                 }
             }
+            case REQUEST_CALENDAR_PERMISSION: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted
+                    Toast.makeText(this, "Calendar permission granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Permission denied
+                    Toast.makeText(this, "Calendar permission is required to add events", Toast.LENGTH_SHORT).show();
+                }
+            }
             break;
         }
     }
@@ -111,20 +120,6 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR},
                     REQUEST_CALENDAR_PERMISSION);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CALENDAR_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted
-                Toast.makeText(this, "Calendar permission granted", Toast.LENGTH_SHORT).show();
-            } else {
-                // Permission denied
-                Toast.makeText(this, "Calendar permission is required to add events", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 }
