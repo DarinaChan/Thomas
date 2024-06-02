@@ -10,7 +10,7 @@
         android:id="@+id/navigation_journeys"
         android:name="edu.thomas.FragmentJourneys"
         android:label="@string/my_journeys"
-        tools:layout="@layout/fragment_journeys" />
+        tools:layout="@layout/item_journey" />
 
     <fragment
         android:id="@+id/navigation_tickets"
