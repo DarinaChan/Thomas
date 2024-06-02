@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast toast = Toast.makeText(getApplicationContext(), "CAMERA authorization granted", Toast.LENGTH_LONG);
                     toast.show();
-                    getFragmentReport().takePicture();
+                    getFragmentReport().getController().takePicture();
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), "CAMERA authorization not granted", Toast.LENGTH_LONG);
                     toast.show();
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             case REQUEST_GALLERY: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getApplicationContext(), "GALLERY authorization granted", Toast.LENGTH_LONG).show();
-                    getFragmentReport().openGallery();
+                    getFragmentReport().getController().openGallery();
                 } else {
                     Toast.makeText(getApplicationContext(), "GALLERY authorization not granted", Toast.LENGTH_LONG).show();
                 }
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_CAMERA: {
                 if(resultCode == RESULT_OK) {
-                    getFragmentReport().setImage((Bitmap) Objects.requireNonNull(data.getExtras()).get("data"));
+                    getFragmentReport().getModel().setBitmap((Bitmap) Objects.requireNonNull(data.getExtras()).get("data"));
                 }
                 break;
             }
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 if(resultCode == RESULT_OK) {
                     Uri selectedImage = data.getData();
                     try {
-                        getFragmentReport().setImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage));
+                        getFragmentReport().getModel().setBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
