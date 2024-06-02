@@ -1,14 +1,23 @@
 package edu.thomas.model.journey;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.provider.CalendarContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,43 +61,57 @@ public class JourneyAdapter extends BaseAdapter {
 
         Journey journey = journeys.get(position);
 
-        TextView departureStation = convertView.findViewById(R.id.departureStation);
-        TextView arrivalStation = convertView.findViewById(R.id.arrivalStation);
-        TextView departureDate = convertView.findViewById(R.id.departureDate);
-        TextView arrivalDate = convertView.findViewById(R.id.arrivalDate);
-        Button addEvent = convertView.findViewById(R.id.addEvent);
+        TextView tvDepartureStation = convertView.findViewById(R.id.departureStation);
+        TextView tvArrivalStation = convertView.findViewById(R.id.arrivalStation);
+        TextView tvDepartureDate = convertView.findViewById(R.id.departureDate);
+        TextView tvArrivalDate = convertView.findViewById(R.id.arrivalDate);
+        ImageButton btnAddToCalendar = convertView.findViewById(R.id.addEvent);
 
-        departureStation.setText(journey.getDepartureStation());
-        arrivalStation.setText(journey.getArrivalStation());
-        departureDate.setText(journey.getDepartureDate());
-        arrivalDate.setText(journey.getArrivalDate());
+        tvDepartureStation.setText(journey.getDepartureStation());
+        tvArrivalStation.setText(journey.getArrivalStation());
+        tvDepartureDate.setText(journey.getDepartureDate());
+        tvArrivalDate.setText(journey.getArrivalDate());
 
-        addEvent.setOnClickListener(v -> addToCalendar(journey));
+        btnAddToCalendar.setOnClickListener(v -> {
+            Log.d("JourneyAdapter", "Button clicked for journey: " + journey.getDepartureStation() + " to " + journey.getArrivalStation());
+            addToCalendar(journey);
+        });
 
         return convertView;
     }
 
     private void addToCalendar(Journey journey) {
-        Intent intent = new Intent(Intent.ACTION_INSERT);
-        intent.setData(CalendarContract.Events.CONTENT_URI);
-        intent.putExtra(CalendarContract.Events.TITLE, journey.getDepartureStation() + " to " + journey.getArrivalStation());
-        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, convertToMillis(journey.getDepartureDate()));
-        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, convertToMillis(journey.getArrivalDate()));
-        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, journey.getDepartureStation() + " - " + journey.getArrivalStation());
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(context, "Calendar permission is required", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.Events.TITLE, journey.getDepartureStation() + " to " + journey.getArrivalStation())
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, convertToMillis(journey.getDepartureDate()))
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, convertToMillis(journey.getArrivalDate()))
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, journey.getDepartureStation() + " - " + journey.getArrivalStation())
+                .putExtra(CalendarContract.Events.DESCRIPTION, "Journey from " + journey.getDepartureStation() + " to " + journey.getArrivalStation());
+
+        PackageManager packageManager = context.getPackageManager();
+        if (intent.resolveActivity(packageManager) != null) {
+            Log.d("JourneyAdapter", "Starting activity to add to calendar");
             context.startActivity(intent);
+        } else {
+            Log.e("JourneyAdapter", "No calendar app found");
+            Toast.makeText(context, "No calendar app found", Toast.LENGTH_SHORT).show();
         }
     }
 
     private long convertToMillis(String dateStr) {
-        // Assume the dateStr is in a format like "yyyy-MM-dd HH:mm"
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.getDefault());
         try {
             Date date = format.parse(dateStr);
             return date != null ? date.getTime() : 0;
         } catch (ParseException e) {
-            return -1;
+            Log.e("JourneyAdapter", "Date parsing error", e);
+            return 0;
         }
     }
 }

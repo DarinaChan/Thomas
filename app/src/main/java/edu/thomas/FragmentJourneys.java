@@ -1,5 +1,6 @@
 package edu.thomas;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,22 +18,19 @@ import edu.thomas.model.journey.Journey;
 import edu.thomas.model.journey.JourneyAdapter;
 
 public class FragmentJourneys extends Fragment {
+    private final String TAG = "Thomas " + getClass().getSimpleName();
     private List<Journey> journeyList;
     private ListView listView;
     private JourneyAdapter adapter;
 
-    @Nullable
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_journeys, container, false);
         listView = view.findViewById(R.id.list_view_journeys);
 
-        // Sample data
         journeyList = new ArrayList<>();
-        journeyList.add(new Journey("Paris", "London", "2024-06-01 08:00", "2024-06-01 10:00"));
-        journeyList.add(new Journey("Berlin", "Munich", "2024-06-02 09:00", "2024-06-02 11:00"));
-        // Add more journeys as needed
+        journeyList.add(new Journey("Antibes", "Nice", "10h30", "10h50"));
+        journeyList.add(new Journey("Nice", "Monaco", "14h20", "14h40"));
 
         adapter = new JourneyAdapter(getContext(), journeyList);
         listView.setAdapter(adapter);
