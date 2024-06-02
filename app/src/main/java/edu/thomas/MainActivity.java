@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,23 +20,22 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.annotations.NotNull;
-import com.google.firebase.messaging.FirebaseMessaging;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 import edu.thomas.databinding.ActivityMainBinding;
 import edu.thomas.service.DatabaseService;
@@ -47,10 +47,9 @@ public class MainActivity extends AppCompatActivity {
     public final String TAG = "Thomas" + getClass().getSimpleName();
     public static final String CHANNEL_ID = "Notification channel";
     private ActivityMainBinding binding;
-    private FragmentManager fm;
-    private FragmentReport fr;
     DatabaseService databaseService = new DatabaseService();
     public User currentUser;
+    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_journeys, R.id.navigation_tickets, R.id.navigation_report, R.id.navigation_profile)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
@@ -88,24 +87,32 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Token = " + task.getResult());
             }
         });
-        // Add some basic informations in the db
-/*
-        User basicUser = new User("Miguel", "Rodrigo");
-        Train basicTrain = new Train(new Date(),"Rouen","Lyon",databaseService.getIdForTrain());
-        currentUser = basicUser;
-        currentUser.addTrainToUser(basicTrain);
-        currentUser.addTrainToUser(basicTrain);
-*/
+
+//         Add some basic informations in the db
+//        User basicUser = new User("Miguel", "Rodrigo");
+//        Train basicTrain = new Train(new Date(),"Rouen","Lyon",databaseService.getIdForTrain());
+//        currentUser = basicUser;
+//        currentUser.addTrainToUser(basicTrain);
+//        currentUser.addTrainToUser(basicTrain);
+//
+//        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+//            if(!task.isSuccessful()) {
+//                Log.d(TAG, "Failed to obtain the token : " + task.getResult());
+//            } else {
+//                Log.d(TAG, "Token = " + task.getResult());
+//            }
+//        });
+
     }
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case REQUEST_CAMERA: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast toast = Toast.makeText(getApplicationContext(), "CAMERA authorization granted", Toast.LENGTH_LONG);
                     toast.show();
-                    fr.takePicture();
+                    getFragmentReport().takePicture();
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), "CAMERA authorization not granted", Toast.LENGTH_LONG);
                     toast.show();
@@ -129,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CAMERA) {
             if(resultCode == RESULT_OK) {
-                fr.setImage((Bitmap) data.getExtras().get("data"));
+                getFragmentReport().setImage((Bitmap) Objects.requireNonNull(data.getExtras()).get("data"));
             }
         }
     }
@@ -142,5 +149,14 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR},
                     REQUEST_CALENDAR_PERMISSION);
         }
+    }
+
+    private FragmentReport getFragmentReport() {
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
+        if(navHostFragment == null) {
+            throw new IllegalStateException("Cannot find navHostFragment");
+        }
+        List<Fragment> fragments = navHostFragment.getChildFragmentManager().getFragments();
+        return (FragmentReport) fragments.get(0);
     }
 }
