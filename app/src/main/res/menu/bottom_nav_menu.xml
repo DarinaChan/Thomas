@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/navigation_journeys"
+        android:id="@+id/navigation_train"
         android:icon="@drawable/ic_train_black_24dp"
         app:showAsAction="ifRoom"
-        android:title="@string/journeys" />
+        android:title="@string/train" />
 
     <item
         android:id="@+id/navigation_tickets"

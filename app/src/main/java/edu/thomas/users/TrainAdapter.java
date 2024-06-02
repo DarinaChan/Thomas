@@ -1,4 +1,6 @@
-package edu.thomas.model.journey;
+package edu.thomas.users;
+
+import static edu.thomas.users.Train.formatDateAndTime;
 
 import android.Manifest;
 import android.content.Context;
@@ -24,25 +26,25 @@ import java.util.Locale;
 
 import edu.thomas.R;
 
-public class JourneyAdapter extends BaseAdapter {
+public class TrainAdapter extends BaseAdapter {
     private final Context context;
-    private final List<Journey> journeys;
+    private final List<Train> trains;
     private final LayoutInflater inflater;
 
-    public JourneyAdapter(Context context, List<Journey> journeys) {
+    public TrainAdapter(Context context, List<Train> trains) {
         this.context = context;
-        this.journeys = journeys;
+        this.trains = trains;
         this.inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return journeys.size();
+        return trains.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return journeys.get(position);
+        return trains.get(position);
     }
 
     @Override
@@ -53,10 +55,10 @@ public class JourneyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_journey, parent, false);
+            convertView = inflater.inflate(R.layout.item_train, parent, false);
         }
 
-        Journey journey = journeys.get(position);
+        Train train = trains.get(position);
 
         TextView tvDate = convertView.findViewById(R.id.date);
         TextView tvDepartureStation = convertView.findViewById(R.id.departureStation);
@@ -65,21 +67,21 @@ public class JourneyAdapter extends BaseAdapter {
         TextView tvArrival = convertView.findViewById(R.id.arrival);
         ImageButton btnAddToCalendar = convertView.findViewById(R.id.addEvent);
 
-        tvDate.setText(journey.getDate());
-        tvDepartureStation.setText(journey.getDepartureStation());
-        tvArrivalStation.setText(journey.getArrivalStation());
-        tvDeparture.setText(journey.getDeparture());
-        tvArrival.setText(journey.getArrival());
+        tvDate.setText(formatDateAndTime(train.getDepartureAt())[0]);
+        tvDepartureStation.setText(train.getDepartureWhere());
+        tvArrivalStation.setText(train.getArrivalWhere());
+        tvDeparture.setText(formatDateAndTime(train.getDepartureAt())[1]);
+        tvArrival.setText(formatDateAndTime(train.getArrivalAt())[1]);
 
         btnAddToCalendar.setOnClickListener(v -> {
-            Log.d("JourneyAdapter", "Button clicked for journey: " + journey.getDepartureStation() + " to " + journey.getArrivalStation());
-            addToCalendar(journey);
+            Log.d("TrainAdapter", "Button clicked for train: " + train.getDepartureWhere() + " to " + train.getArrivalWhere());
+            addToCalendar(train);
         });
 
         return convertView;
     }
 
-    private void addToCalendar(Journey journey) {
+    private void addToCalendar(Train train) {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context, "Calendar permission is required", Toast.LENGTH_SHORT).show();
             return;
@@ -87,30 +89,30 @@ public class JourneyAdapter extends BaseAdapter {
 
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
-                .putExtra(CalendarContract.Events.TITLE, journey.getDepartureStation() + " à " + journey.getArrivalStation())
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, convertToMillis(journey.getDate(), journey.getDeparture()))
-                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, convertToMillis(journey.getDate(), journey.getArrival()))
-                .putExtra(CalendarContract.Events.EVENT_LOCATION, journey.getDepartureStation() + " - " + journey.getArrivalStation())
-                .putExtra(CalendarContract.Events.DESCRIPTION, "Voyage de " + journey.getDepartureStation() + " à " + journey.getArrivalStation());
+                .putExtra(CalendarContract.Events.TITLE, train.getDepartureWhere() + " à " + train.getArrivalWhere())
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, train.getDepartureAt())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, train.getArrivalAt())
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, train.getDepartureWhere() + " - " + train.getArrivalWhere())
+                .putExtra(CalendarContract.Events.DESCRIPTION, "Voyage de " + train.getArrivalWhere() + " à " + train.getArrivalWhere());
 
         PackageManager packageManager = context.getPackageManager();
         if (intent.resolveActivity(packageManager) != null) {
-            Log.d("JourneyAdapter", "Starting activity to add to calendar");
+            Log.d("TrainAdapter", "Starting activity to add to calendar");
             context.startActivity(intent);
         } else {
-            Log.e("JourneyAdapter", "No calendar app found");
+            Log.e("TrainAdapter", "No calendar app found");
             Toast.makeText(context, "No calendar app found", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private long convertToMillis(String dateStr, String hourStr) {
+    private long convertToMillis(String dateStr) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH'h'mm", Locale.getDefault());
-        String dateTimeStr = dateStr + " " + hourStr;
+        String dateTimeStr = dateStr;
         try {
             Date date = format.parse(dateTimeStr);
             return date != null ? date.getTime() : 0;
         } catch (ParseException e) {
-            Log.e("JourneyAdapter", "Date parsing error", e);
+            Log.e("TrainAdapter", "Date parsing error", e);
             return 0;
         }
     }

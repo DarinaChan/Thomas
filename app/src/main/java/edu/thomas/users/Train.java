@@ -1,11 +1,18 @@
 package edu.thomas.users;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import edu.thomas.service.DatabaseService;
 
 public class Train {
     private Date departureAt;
+    private Date arrivalAt;
+    private String departureWhere;
+    private String arrivalWhere;
+    private String trainId;
+    public String trainName;
 
     public Date getDepartureAt() {
         return departureAt;
@@ -15,6 +22,11 @@ public class Train {
         this.departureAt = departureAt;
     }
 
+    public Date getArrivalAt() { return arrivalAt;}
+
+    public void setArrivalAt(Date arrivalAt) {
+        this.arrivalAt = arrivalAt;
+    }
     public String getDepartureWhere() {
         return departureWhere;
     }
@@ -43,18 +55,16 @@ public class Train {
         this.trainName = trainName;
     }
 
-    public String trainName;
 
     public void setTrainId(String trainId) {
         this.trainId = trainId;
     }
 
-    private String departureWhere;
-    private String arrivalWhere;
-    private String trainId;
+
     private DatabaseService databaseService = new DatabaseService();
-    public Train(Date departureAt, String departureWhere, String arrivalWhere, String trainId) {
+    public Train(Date departureAt, Date arrivalAt, String departureWhere, String arrivalWhere, String trainId) {
         this.departureAt = departureAt;
+        this.arrivalAt = arrivalAt;
         this.departureWhere = departureWhere;
         this.arrivalWhere = arrivalWhere;
         this.trainId = trainId;
@@ -62,4 +72,14 @@ public class Train {
         databaseService.addTrain(this);
     }
     public Train(){}
+
+    public static String[] formatDateAndTime(Date date) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE dd MMMM yyyy", Locale.getDefault());
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
+        String formattedDate = dateFormatter.format(date);
+        String formattedTime = timeFormatter.format(date);
+
+        return new String[]{formattedDate, formattedTime};
+    }
 }

@@ -166,7 +166,7 @@ public class FragmentReport extends Fragment {
             @Override
             public void onMiguelCallback(User user) {
                 if (user != null) {
-                    Train basicTrain = new Train(new Date(),"Prout","Marseille",db.getIdForTrain());
+                    Train basicTrain = new Train(new Date(), new Date(),"Prout","Marseille",db.getIdForTrain());
                     user.addTrainToUser(basicTrain);
                     db.addTrain(basicTrain);
                     db.deleteAndReAddUser(user);

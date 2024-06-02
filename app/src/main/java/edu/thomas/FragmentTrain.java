@@ -11,24 +11,25 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import edu.thomas.model.journey.Journey;
-import edu.thomas.model.journey.JourneyAdapter;
+import edu.thomas.users.Train;
+import edu.thomas.users.TrainAdapter;
 
-public class FragmentJourneys extends Fragment {
+public class FragmentTrain extends Fragment {
     private final String TAG = "Thomas " + getClass().getSimpleName();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_journeys, container, false);
-        ListView listView = view.findViewById(R.id.list_view_journeys);
+        View view = inflater.inflate(R.layout.fragment_train, container, false);
+        ListView listView = view.findViewById(R.id.list_view_train);
 
-        List<Journey> journeyList = new ArrayList<>();
-        journeyList.add(new Journey("24/09/2023", "Antibes", "Nice", "10h30", "10h50"));
-        journeyList.add(new Journey("24/12/2023", "Nice", "Monaco", "14h20", "14h40"));
+        List<Train> journeyList = new ArrayList<>();
+        journeyList.add(new Train(new Date(1695524400), new Date(1695524400), "Antibes", "Nice", "123"));
+        journeyList.add(new Train(new Date(1703437200), new Date(1703437200), "Nice", "Monaco", "456"));
 
-        JourneyAdapter adapter = new JourneyAdapter(getContext(), journeyList);
+        TrainAdapter adapter = new TrainAdapter(getContext(), journeyList);
         listView.setAdapter(adapter);
 
         return view;
