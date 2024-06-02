@@ -2,8 +2,8 @@ package edu.thomas.model.incident;
 
 public class PassengerIncident extends Incident {
 
-    public PassengerIncident(TypeOfIncident type,String description){
-        super(type,description);
+    public PassengerIncident(String trainId,TypeOfIncident type,String description){
+        super(trainId,type,description);
     }
 
 }

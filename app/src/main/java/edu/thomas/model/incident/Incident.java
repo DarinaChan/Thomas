@@ -1,19 +1,41 @@
 package edu.thomas.model.incident;
 
-import java.util.Optional;
-
-import edu.thomas.Database;
+import edu.thomas.service.DatabaseService;
+import edu.thomas.service.NotificationService;
+import java.util.Date;
 
 public abstract class Incident {
     private TypeOfIncident type; // No SetType because it's only set at the initialization
     private String description;
     private String id;
-    Database db = new Database();
 
-    public Incident(TypeOfIncident type,String description){
+    public String getTrainId() {
+        return trainId;
+    }
+
+    public void setTrainId(String trainId) {
+        this.trainId = trainId;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    private String trainId;
+    private Date createdAt;
+    DatabaseService db = new DatabaseService();
+    NotificationService notificationService = new NotificationService();
+
+    public Incident(String trainId,TypeOfIncident type,String description){
         this.type = type;
         setDescription(description);
         this.id = db.getIdForIncident();
+        this.trainId = trainId;
+        this.createdAt = new Date();
     }
     public void setDescription(String description) {
         this.description = description;
@@ -26,7 +48,7 @@ public abstract class Incident {
         return description;
     }
     public void notifyUsers(){
-        // Notify everyone
+
     }
     public int getTypeId(){
         return this.type.ordinal();

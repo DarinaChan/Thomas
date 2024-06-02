@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="360dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal">
@@ -65,15 +66,16 @@
         app:backgroundTint="@color/white" />
 
     <com.google.android.material.button.MaterialButton
-        android:textAllCaps="false"
         android:id="@+id/deconnection"
-        android:layout_marginTop="48dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/advanced_settings"
+        android:layout_marginTop="8dp"
         android:width="350dp"
         android:height="64dp"
         android:backgroundTint="@color/red"
-        android:text="@string/delete_my_profile" />
+        android:text="@string/delete_my_profile"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/advanced_settings"
+        tools:layout_editor_absoluteX="-58dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

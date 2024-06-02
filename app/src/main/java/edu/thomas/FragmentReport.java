@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -21,27 +20,33 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.PackageManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.FirebaseDatabase;
-import java.security.Permission;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.thomas.model.incident.Incident;
 import edu.thomas.model.incident.IncidentFactory;
 import edu.thomas.model.incident.TypeOfIncident;
+import edu.thomas.service.DatabaseService;
+import edu.thomas.service.FirestoreCallback;
+import edu.thomas.users.Train;
+import edu.thomas.users.User;
 
 public class FragmentReport extends Fragment {
-    Database db = new Database();
+    DatabaseService db = new DatabaseService();
     int spinnerPosition = 0;
     String incident_desc;
 
     ImageView imageView;
     IncidentFactory facto = new IncidentFactory();
+    String trainId = "";
+    List<Train> trains;
+    int trainSpinnerPosition = 0;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +64,9 @@ public class FragmentReport extends Fragment {
                 takePicture();
             }
         });
+
+        Spinner trainSpinner = rootView.findViewById(R.id.train_spinner);
+        fetchTrainNames(trainSpinner);
 
         List<String> incidents = new ArrayList<>();
         incidents.add("-- Selectionnez une catégorie --");
@@ -82,13 +90,13 @@ public class FragmentReport extends Fragment {
                     showPopup("Incident envoyé avec succès !");
                     incidentDesc.setText(""); //Reset the text
                     spinner.setSelection(0); // Reset the spinner
+                    trainSpinner.setSelection(0);
                 }
                 else{
                     showPopup("Veuillez choisir une catégorie");
                 }
             }
         });
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -97,6 +105,16 @@ public class FragmentReport extends Fragment {
                     showPopup("Un train n'est jamais à l'heure !");
                     spinner.setSelection(0); //Reset the spinner
                 }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Do nothing
+            }
+        });
+        trainSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                trainSpinnerPosition = position;
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
@@ -112,10 +130,9 @@ public class FragmentReport extends Fragment {
     }
     public void sendIncident(){
         System.out.println(FirebaseDatabase.getInstance());
-        Incident incident = facto.createIncident(spinnerPosition,incident_desc).get();
+        Incident incident = facto.createIncident(trains.get(trainSpinnerPosition - 1).getTrainId(),spinnerPosition,incident_desc).get();
         System.out.println(incident);
         db.addIncident(incident);
-
     }
 
     public void takePicture() {
@@ -126,4 +143,28 @@ public class FragmentReport extends Fragment {
     public void setImage(Bitmap bitmap) {
         imageView.setImageBitmap(bitmap);
     }
+    public void fetchTrainNames(Spinner trainSpinner) {
+        db.getUsers(new FirestoreCallback() {
+            @Override
+            public void onUserCallback(List<User> userList) {
+                if (!userList.isEmpty()) {
+                    trains = userList.get(0).getTrains();
+                    List<String> trainNames = new ArrayList<>();
+                    trainNames.add("-- Sélectionnez un trajet--");
+                    for (Train t : trains) {
+                        trainNames.add(t.getTrainName());
+                    }
+                    updateUIWithTrainNames(trainNames,trainSpinner);
+                }
+            }
+        });
+    }
+
+    public void updateUIWithTrainNames(List<String> trainNames, Spinner trainSpinner) {
+        ArrayAdapter<String> trainAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, trainNames);
+        trainAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        trainSpinner.setAdapter(trainAdapter);
+    }
+
+
 }
