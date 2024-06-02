@@ -1,12 +1,25 @@
 <resources>
     <string name="app_name">Thomas</string>
     <string name="required_fields">* champs obligatoires</string>
+    <!-- Login page -->
+    <string name="email">E-mail</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">Connexion</string>
+    <string name="password_recovery">Mot de passe oublié ?</string>
+    <string name="register">Créer un compte</string>
+    <string name="guest">Continuer en tant qu\'invité</string>
 
     <!-- Menu -->
     <string name="journeys">Trajets</string>
     <string name="tickets">Billets</string>
     <string name="report">Signaler</string>
     <string name="profile">Profil</string>
+    <string name="mes_trajet">Mes trajet</string>
+    <string name="choisir_un_trajet">Choisir un trajet</string>
+    <string name="comportement_suspect">Comportement suspect</string>
+    <string name="importer_un_billet">Importer un billet</string>
+    <string name="signer_un_incident">Signaler un incident</string>
+    <string name="mon_profil">Mon profil</string>
 
     <!-- Journey -->
     <string name="my_journeys">Mes trajets</string>
@@ -20,6 +33,12 @@
     <string name="the_journey_has_been_recorded">Le trajet a bien été enregistré !</string>
 
     <string name="train_delayed_by">Train en retard de</string>
+    <string name="champs_obligatoire">*champs obligatoires</string>
+    <string name="gare_de_depart">Gare de départ *</string>
+    <string name="gare_d_arrivee">Gare d\'arrivée</string>
+    <string name="depart">Départ:</string>
+    <string name="arrivee">Arrivée:</string>
+    <string name="train_en_retard_de">Train en retard de</string>
     <string name="minutes">minutes</string>
     <string name="suspicious_behaviour_at_the_train_station_of">Comportement suspect à la gare de</string>
     <string name="still_ongoing">Toujours en cours</string>
@@ -32,6 +51,21 @@
     <string name="name_of_ticket_holder">Nom du titulaire du billet</string>
     <string name="to_retrieve_your_ticket">Pour retrouver votre billet, veuillez renseigner ces informations</string>
     <string name="the_ticket_has_been_recorded">Le billet a bien été enregistré !</string>
+    <string name="comportement_suspect_a_la_gare_de">Comportement suspect à la gare de</string>
+    <string name="profil_du_voyageur">Profil du voyageur</string>
+    <string name="le_trajet_a_bien_ete_enregistre">Le trajet a bien été enregistré !</string>
+    <string name="merci_pour_votre_retour">Merci pour votre retour !</string>
+    <string name="reference_de_reservation">Référence de réservation *</string>
+    <string name="nom_du_titulaire_du_billet">Nom du titulaire du billet</string>
+    <string name="pour_retrouver_votre_billet">Pour retrouver votre billet, veuillez renseigner ces informations</string>
+    <string name="decrivez_l_incident">Décrivez l’incident le plus précisément possible</string>
+    <string name="perturbation_des_horaires">Perturbation des horaires</string>
+    <string name="baggage_abandonne">Baggage abandonné</string>
+    <string name="probleme_technique">Problème technique</string>
+    <string name="vos_informations">Vos informations</string>
+    <string name="profil_voyageur">Profil voyageur</string>
+    <string name="notifications">Notifications</string>
+    <string name="parametres_avances">Paramètres avancés</string>
 
     <!-- Report -->
     <string name="report_an_incident">Signaler un incident</string>
@@ -43,11 +77,29 @@
     <string name="describe_the_incident">Décrivez l’incident le plus précisément possible</string>
     <string name="send">Envoyer</string>
     <string name="thanks_for_your_feedback">Merci pour votre retour !</string>
+    <string name="trajets">Trajets</string>
+    <string name="billet">Billet</string>
+    <string name="signaler">Signaler</string>
+    <string name="profil">Profil</string>
+    <string name="toujours_en_cours">TOUJOURS EN COURS</string>
+    <string name="resolu">RÉVOLU</string>
+    <string name="rechercher_mon_trajet">RECHERCHER MON TRAJET</string>
+    <string name="envoyer">ENVOYER</string>
+    <string name="se_deconnecter">SE DÉCONNECTER</string>
+    <string name="ajouter_le_billet">AJOUTER LE BILLET</string>
 
     <!-- Profile -->
-    <string name="my_profile">Mon profil</string>
-    <string name="your_information">Vos informations</string>
-    <string name="notifications">Notifications</string>
-    <string name="advanced_settings">Paramètres avancés</string>
-    <string name="delete_my_profile">Supprimer mon profil</string>
+<string name="my_profile">Mon profil</string>
+<string name="your_information">Vos informations</string>
+<string name="advanced_settings">Paramètres avancés</string>
+<string name="delete_my_profile">Supprimer mon profil</string>
+    <!--    PickPocket, // PassengerIncident-->
+    <!--    DangerousPassenger, // PassengerIncident-->
+    <!--    TrainLate, // TrainIncident-->
+    <!--    TrainOnTime, // TrainIncident-->
+    <!--    TrainCancelled, // TrainIncident-->
+    <!--    TemperatureTooHigh, // TemperatureIncident-->
+    <!--    TemperatureTooLow, // TemperatureIncident-->
+    <!--    NoEasyAcess, // AccessIncident-->
+    <!--    OvercrowdedTrain // AccessIncident-->
 </resources>

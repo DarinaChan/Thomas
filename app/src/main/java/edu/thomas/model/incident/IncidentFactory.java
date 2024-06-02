@@ -2,7 +2,8 @@ package edu.thomas.model.incident;
 import java.util.Optional;
 public class IncidentFactory {
 
-    public Optional<Incident> createIncident(TypeOfIncident type, String description){
+    public Optional<Incident> createIncident(int typeId, String description){
+        TypeOfIncident type = getTypeFromId(typeId).get();
         switch (type){
             case PickPocket:
             case DangerousPassenger:
@@ -22,5 +23,11 @@ public class IncidentFactory {
                 System.out.println("Aucun incident n'a été trouvé.");
                 return Optional.empty();
         }
+    }
+    public Optional<TypeOfIncident> getTypeFromId(int id){
+        for (TypeOfIncident t: TypeOfIncident.values()){
+            if (t.ordinal() == id){return Optional.of(t);}
+        }
+        return Optional.empty();
     }
 }
