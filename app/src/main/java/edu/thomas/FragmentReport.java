@@ -1,26 +1,18 @@
 package edu.thomas;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
@@ -34,17 +26,22 @@ import java.util.List;
 import edu.thomas.model.incident.Incident;
 import edu.thomas.model.incident.IncidentFactory;
 import edu.thomas.model.incident.TypeOfIncident;
+import edu.thomas.mvc.IncidentController;
+import edu.thomas.mvc.IncidentModel;
+import edu.thomas.mvc.IncidentView;
 import edu.thomas.service.DatabaseService;
 import edu.thomas.service.FirestoreMiguelCallback;
 import edu.thomas.users.Train;
 import edu.thomas.users.User;
 
 public class FragmentReport extends Fragment {
+    IncidentView view;
+    IncidentModel model;
+    IncidentController controller;
     DatabaseService db = new DatabaseService();
     int spinnerPosition = 0;
     String incident_desc;
 
-    ImageView imageView;
     IncidentFactory facto = new IncidentFactory();
     String trainId = "";
     List<Train> trains;
@@ -56,36 +53,17 @@ public class FragmentReport extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View rootView = inflater.inflate(R.layout.fragment_report, container, false);
-        imageView = rootView.findViewById(R.id.photo);
+
+        view = new IncidentView(rootView);
+        model = new IncidentModel();
+        controller = new IncidentController(view, model, getContext(), getActivity());
+        view.setController(controller);
+        view.setModel(model);
+        model.addObserver(view);
+
         Spinner spinner = rootView.findViewById(R.id.incident_spinner);
-
-        rootView.findViewById(R.id.camera_button).setOnClickListener(view -> {
-            if(ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[] {android.Manifest.permission.CAMERA}, IPictureActivity.REQUEST_CAMERA);
-            }
-            else { // Permission still granted
-                takePicture();
-            }
-        });
-
         Spinner trainSpinner = rootView.findViewById(R.id.train_spinner);
         fetchTrainNames(trainSpinner);
-
-        rootView.findViewById(R.id.gallery_button).setOnClickListener(view -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_DENIED) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.READ_MEDIA_IMAGES}, IPictureActivity.REQUEST_GALLERY);
-                } else { // Permission still granted
-                    openGallery();
-                }
-            } else {
-                if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, IPictureActivity.REQUEST_GALLERY);
-                } else { // Permission still granted
-                    openGallery();
-                }
-            }
-        });
 
         List<String> incidents = new ArrayList<>();
         incidents.add("-- Selectionnez une catégorie --");
@@ -154,19 +132,6 @@ public class FragmentReport extends Fragment {
         db.addIncident(incident);
     }
 
-    public void takePicture() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        requireActivity().startActivityForResult(intent, IPictureActivity.REQUEST_CAMERA);
-    }
-
-    public void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        requireActivity().startActivityForResult(intent, IPictureActivity.REQUEST_GALLERY);
-    }
-
-    public void setImage(Bitmap bitmap) {
-        imageView.setImageBitmap(bitmap);
-    }
     public void fetchTrainNames(Spinner trainSpinner) {
         showProgressDialog();
         db.getMiguel(new FirestoreMiguelCallback() {
@@ -216,5 +181,13 @@ public class FragmentReport extends Fragment {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
+    }
+
+    public IncidentController getController() {
+        return this.controller;
+    }
+
+    public IncidentModel getModel() {
+        return this.model;
     }
 }
