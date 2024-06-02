@@ -19,11 +19,7 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import edu.thomas.R;
 
