@@ -3,7 +3,6 @@ package edu.thomas;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,15 +17,14 @@ import androidx.navigation.ui.NavigationUI;
 import edu.thomas.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    private int REQUEST_CALENDAR_PERMISSION = 1;
-    private ActivityMainBinding binding;
+    private final int REQUEST_CALENDAR_PERMISSION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestCalendarPermission();
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        edu.thomas.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Passing each menu ID as a set of Ids because each

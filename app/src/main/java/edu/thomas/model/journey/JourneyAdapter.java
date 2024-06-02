@@ -4,15 +4,12 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,9 +25,9 @@ import java.util.Locale;
 import edu.thomas.R;
 
 public class JourneyAdapter extends BaseAdapter {
-    private Context context;
-    private List<Journey> journeys;
-    private LayoutInflater inflater;
+    private final Context context;
+    private final List<Journey> journeys;
+    private final LayoutInflater inflater;
 
     public JourneyAdapter(Context context, List<Journey> journeys) {
         this.context = context;
