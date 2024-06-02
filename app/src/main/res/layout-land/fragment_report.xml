@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.15"
+        android:layout_weight="0.3"
         android:orientation="horizontal"
         >
 
@@ -16,7 +16,7 @@
             android:id="@+id/cardview_description"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginVertical="20dp"
+            android:layout_marginVertical="10dp"
             android:layout_marginLeft="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/gallery_button"
@@ -71,32 +71,50 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
         android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.15"
-        android:layout_marginHorizontal="20dp">
+        android:layout_marginHorizontal="20dp"
+        android:layout_weight="0.50">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reference"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:id="@+id/incident_desc"
+                android:hint="Description de l'incident"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:orientation="vertical"
             android:layout_height="match_parent"
-            android:layout_weight="0.8">
-
+            android:layout_weight="0.50"
+            android:layout_marginHorizontal="20dp">
 
             <Spinner
                 android:id="@+id/train_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.50"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.45"
+                android:layout_marginHorizontal="20dp"
                 >
             </Spinner>
 
             <Spinner
                 android:id="@+id/incident_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.50"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.45"
+                android:layout_marginHorizontal="20dp"
                 >
 
             </Spinner>
@@ -107,36 +125,20 @@
             android:id="@+id/photo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.1"
             >
 
         </ImageView>
 
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/reference"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="20dp"
-        android:layout_weight="0.60"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="top"
-            android:id="@+id/incident_desc"
-            android:hint="Description de l'incident"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addIncident"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="20dp"
-        android:layout_weight="0.10"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:layout_weight="0.15"
         android:text="@string/envoyer"
         app:layout_constraintLeft_toLeftOf="parent" />
 
