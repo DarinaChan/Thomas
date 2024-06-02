@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +62,7 @@ public class TrainAdapter extends BaseAdapter {
         Train train = trains.get(position);
 
         TextView tvDate = convertView.findViewById(R.id.date);
+        ImageView imgTrainType = convertView.findViewById(R.id.imgTrain);
         TextView tvDepartureStation = convertView.findViewById(R.id.departureStation);
         TextView tvArrivalStation = convertView.findViewById(R.id.arrivalStation);
         TextView tvDeparture = convertView.findViewById(R.id.departure);
@@ -68,6 +70,8 @@ public class TrainAdapter extends BaseAdapter {
         ImageButton btnAddToCalendar = convertView.findViewById(R.id.addEvent);
 
         tvDate.setText(formatDateAndTime(train.getDepartureAt())[0]);
+
+        imgTrainType.setImageResource(train.getImage());
         tvDepartureStation.setText(train.getDepartureWhere());
         tvArrivalStation.setText(train.getArrivalWhere());
         tvDeparture.setText(formatDateAndTime(train.getDepartureAt())[1]);
@@ -90,8 +94,8 @@ public class TrainAdapter extends BaseAdapter {
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.Events.TITLE, train.getDepartureWhere() + " à " + train.getArrivalWhere())
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, train.getDepartureAt())
-                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, train.getArrivalAt())
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, train.getDepartureAt().getTime())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, train.getArrivalAt().getTime())
                 .putExtra(CalendarContract.Events.EVENT_LOCATION, train.getDepartureWhere() + " - " + train.getArrivalWhere())
                 .putExtra(CalendarContract.Events.DESCRIPTION, "Voyage de " + train.getArrivalWhere() + " à " + train.getArrivalWhere());
 
@@ -102,18 +106,6 @@ public class TrainAdapter extends BaseAdapter {
         } else {
             Log.e("TrainAdapter", "No calendar app found");
             Toast.makeText(context, "No calendar app found", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private long convertToMillis(String dateStr) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH'h'mm", Locale.getDefault());
-        String dateTimeStr = dateStr;
-        try {
-            Date date = format.parse(dateTimeStr);
-            return date != null ? date.getTime() : 0;
-        } catch (ParseException e) {
-            Log.e("TrainAdapter", "Date parsing error", e);
-            return 0;
         }
     }
 }

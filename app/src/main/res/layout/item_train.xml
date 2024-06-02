@@ -39,10 +39,11 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/imgTrain"
+                app:layout_constraintBottom_toBottomOf="@id/imgTrain"
                 app:layout_constraintLeft_toRightOf="@id/imgTrain"
-                android:text="24/12/2023"
-                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:text="Samedi 30 novembre"
+                android:textStyle="bold"
                 />
 
             <!-- Departure -->

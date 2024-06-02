@@ -124,7 +124,6 @@ public class FragmentReport extends Fragment {
             }
         });
 
-
         return rootView;
     }
     private void showPopup(String text) {
@@ -166,7 +165,7 @@ public class FragmentReport extends Fragment {
             @Override
             public void onMiguelCallback(User user) {
                 if (user != null) {
-                    Train basicTrain = new Train(new Date(), new Date(),"Prout","Marseille",db.getIdForTrain());
+                    Train basicTrain = new Train(new Date(), new Date(), "Prout", "Marseille", "TER", db.getIdForTrain());
                     user.addTrainToUser(basicTrain);
                     db.addTrain(basicTrain);
                     db.deleteAndReAddUser(user);
@@ -180,6 +179,4 @@ public class FragmentReport extends Fragment {
         trainAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         trainSpinner.setAdapter(trainAdapter);
     }
-
-
 }

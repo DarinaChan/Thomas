@@ -26,8 +26,8 @@ public class FragmentTrain extends Fragment {
         ListView listView = view.findViewById(R.id.list_view_train);
 
         List<Train> journeyList = new ArrayList<>();
-        journeyList.add(new Train(new Date(1695524400), new Date(1695524400), "Antibes", "Nice", "123"));
-        journeyList.add(new Train(new Date(1703437200), new Date(1703437200), "Nice", "Monaco", "456"));
+        journeyList.add(new Train(new Date(1663981200000L), new Date(1663983300000L), "Antibes", "Nice", "TGV", "123"));
+        journeyList.add(new Train(new Date(1671895800000L), new Date(1671897000000L), "Nice", "Monaco", "TER", "456"));
 
         TrainAdapter adapter = new TrainAdapter(getContext(), journeyList);
         listView.setAdapter(adapter);
