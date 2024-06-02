@@ -1,11 +1,15 @@
 package edu.thomas.model.train;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 import edu.thomas.R;
 
 public class TrainInfo {
+    @JsonProperty("arrival_date_time")
     String horaireDepart;
+    @JsonProperty("departure_date_time")
     String horaireArrivee;
     String gareDepart;
     String gareArrivee;

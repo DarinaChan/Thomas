@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/editTextDepart" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/editTextDepart"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -64,7 +64,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/editTextArrivee" />
 
-        <EditText
+
+        <AutoCompleteTextView
             android:id="@+id/editTextArrivee"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -82,32 +83,45 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/champArrivee">
 
+
         <Button
-            android:id="@+id/dateButton"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="30dp"
-            android:onClick="showDatePickerDialog"
-            android:text="Date"
+            android:id="@+id/date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="date"
+            android:tag="datePicker"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/time_picker"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/profileVoyeur"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
-            android:layout_marginRight="30dp"
-            android:onClick="showDatePickerDialog"
-            android:text="Profil du voyageur"
+            android:id="@+id/time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="heure"
+            android:tag="timePicker"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/rounded_background_blue"
+            android:src="@drawable/loupe"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/time_picker"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <ListView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listVue"
         app:layout_constraintEnd_toEndOf="parent"

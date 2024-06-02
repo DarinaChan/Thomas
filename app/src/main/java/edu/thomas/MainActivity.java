@@ -11,6 +11,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import edu.thomas.databinding.ActivityMainBinding;
+import edu.thomas.model.train.TrainStation;
+import edu.thomas.model.train.TrainStationMap;
 
 public class MainActivity extends AppCompatActivity implements CallbackActivity {
 
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements CallbackActivity 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TrainStationMap setUp= TrainStationMap.getInstance(this);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
