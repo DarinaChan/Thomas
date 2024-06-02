@@ -1,17 +1,23 @@
 package edu.thomas.model.journey;
 
 public class Journey {
+    private String date;
     private String departureStation;
     private String arrivalStation;
-    private String departureDate;
-    private String arrivalDate;
+    private String departure;
+    private String arrival;
 
     // Constructors, getters, and setters
-    public Journey(String departureStation, String arrivalStation, String departureDate, String arrivalDate) {
+    public Journey(String date, String departureStation, String arrivalStation, String departure, String arrival) {
+        this.date = date;
         this.departureStation = departureStation;
         this.arrivalStation = arrivalStation;
-        this.departureDate = departureDate;
-        this.arrivalDate = arrivalDate;
+        this.departure = departure;
+        this.arrival = arrival;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public String getDepartureStation() {
@@ -22,11 +28,11 @@ public class Journey {
         return arrivalStation;
     }
 
-    public String getDepartureDate() {
-        return departureDate;
+    public String getDeparture() {
+        return departure;
     }
 
-    public String getArrivalDate() {
-        return arrivalDate;
+    public String getArrival() {
+        return arrival;
     }
 }

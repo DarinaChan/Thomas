@@ -25,8 +25,8 @@ public class FragmentJourneys extends Fragment {
         ListView listView = view.findViewById(R.id.list_view_journeys);
 
         List<Journey> journeyList = new ArrayList<>();
-        journeyList.add(new Journey("Antibes", "Nice", "10h30", "10h50"));
-        journeyList.add(new Journey("Nice", "Monaco", "14h20", "14h40"));
+        journeyList.add(new Journey("24/09/2023", "Antibes", "Nice", "10h30", "10h50"));
+        journeyList.add(new Journey("24/12/2023", "Nice", "Monaco", "14h20", "14h40"));
 
         JourneyAdapter adapter = new JourneyAdapter(getContext(), journeyList);
         listView.setAdapter(adapter);

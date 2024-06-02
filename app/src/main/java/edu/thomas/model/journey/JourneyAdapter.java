@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -58,16 +59,18 @@ public class JourneyAdapter extends BaseAdapter {
 
         Journey journey = journeys.get(position);
 
+        TextView tvDate = convertView.findViewById(R.id.date);
         TextView tvDepartureStation = convertView.findViewById(R.id.departureStation);
         TextView tvArrivalStation = convertView.findViewById(R.id.arrivalStation);
-        TextView tvDepartureDate = convertView.findViewById(R.id.departureDate);
-        TextView tvArrivalDate = convertView.findViewById(R.id.arrivalDate);
+        TextView tvDeparture = convertView.findViewById(R.id.departure);
+        TextView tvArrival = convertView.findViewById(R.id.arrival);
         ImageButton btnAddToCalendar = convertView.findViewById(R.id.addEvent);
 
+        tvDate.setText(journey.getDate());
         tvDepartureStation.setText(journey.getDepartureStation());
         tvArrivalStation.setText(journey.getArrivalStation());
-        tvDepartureDate.setText(journey.getDepartureDate());
-        tvArrivalDate.setText(journey.getArrivalDate());
+        tvDeparture.setText(journey.getDeparture());
+        tvArrival.setText(journey.getArrival());
 
         btnAddToCalendar.setOnClickListener(v -> {
             Log.d("JourneyAdapter", "Button clicked for journey: " + journey.getDepartureStation() + " to " + journey.getArrivalStation());
@@ -85,11 +88,11 @@ public class JourneyAdapter extends BaseAdapter {
 
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
-                .putExtra(CalendarContract.Events.TITLE, journey.getDepartureStation() + " to " + journey.getArrivalStation())
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, convertToMillis(journey.getDepartureDate()))
-                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, convertToMillis(journey.getArrivalDate()))
+                .putExtra(CalendarContract.Events.TITLE, journey.getDepartureStation() + " à " + journey.getArrivalStation())
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, convertToMillis(journey.getDate(), journey.getDeparture()))
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, convertToMillis(journey.getDate(), journey.getArrival()))
                 .putExtra(CalendarContract.Events.EVENT_LOCATION, journey.getDepartureStation() + " - " + journey.getArrivalStation())
-                .putExtra(CalendarContract.Events.DESCRIPTION, "Journey from " + journey.getDepartureStation() + " to " + journey.getArrivalStation());
+                .putExtra(CalendarContract.Events.DESCRIPTION, "Voyage de " + journey.getDepartureStation() + " à " + journey.getArrivalStation());
 
         PackageManager packageManager = context.getPackageManager();
         if (intent.resolveActivity(packageManager) != null) {
@@ -101,10 +104,11 @@ public class JourneyAdapter extends BaseAdapter {
         }
     }
 
-    private long convertToMillis(String dateStr) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.getDefault());
+    private long convertToMillis(String dateStr, String hourStr) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH'h'mm", Locale.getDefault());
+        String dateTimeStr = dateStr + " " + hourStr;
         try {
-            Date date = format.parse(dateStr);
+            Date date = format.parse(dateTimeStr);
             return date != null ? date.getTime() : 0;
         } catch (ParseException e) {
             Log.e("JourneyAdapter", "Date parsing error", e);
