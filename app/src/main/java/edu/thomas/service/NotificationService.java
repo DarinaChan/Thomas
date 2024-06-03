@@ -33,9 +33,11 @@ public class NotificationService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if (remoteMessage.getNotification() != null) {
+            // Notification image processing
             Uri imageUri = remoteMessage.getNotification().getImageUrl();
             Bitmap image = null;
             if(imageUri != null) {
+
                 String imageUrl = imageUri.toString();
                 image = getBitmapFromUrl(imageUrl);
 
@@ -52,21 +54,17 @@ public class NotificationService extends FirebaseMessagingService {
             }
 
             sendNotification(image, remoteMessage);
-        } else { // Numéro 0 pour l'instant (on peut les classer en fonction de leurs ids)
+        }
             Log.d(TAG, "The notification is empty.");
         }
-    }
     public void sendNotifIfUserConcerned(Bitmap image, RemoteMessage remoteMessage){ //Check if the user is on the train the incident is reported at
         databaseService.getMiguel(new FirestoreMiguelCallback() {
             @Override
             public void onMiguelCallback(User user) {
                 if (user != null) {
-                    System.out.println("here");
                     listUserTrains = user.getTrains();
                     for (Train t : listUserTrains){
-                        System.out.println(t.getTrainId() + remoteMessage.getNotification().getBody().toString());
                         if (t.getTrainId().equals(remoteMessage.getNotification().getBody().toString())){
-                            System.out.println("done");
                             sendNotification(image,remoteMessage);
                             return;
                         }
@@ -90,19 +88,22 @@ public class NotificationService extends FirebaseMessagingService {
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
+
+
+    @Override
+    public void onNewToken(@NonNull String token) {
+        super.onNewToken(token);
+        Log.d(TAG, "Refreshed token: " + token);
+    }
+
     private Bitmap getBitmapFromUrl(String imageUrl) {
         try {
             URL url = new URL(imageUrl);
             return BitmapFactory.decodeStream(url.openConnection().getInputStream());
         } catch (IOException e) {
-            Log.e(TAG, "Erreur lors du téléchargement de l'image", e);
+            Log.e(TAG, "Error while downloading the image", e);
             return null;
         }
-    }
-    @Override
-    public void onNewToken(@NonNull String token) {
-        super.onNewToken(token);
-        Log.d(TAG, "Refreshed token: " + token);
     }
 
 }
