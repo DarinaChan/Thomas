@@ -44,9 +44,6 @@ public class NotificationService extends FirebaseMessagingService {
             } else {
                 Log.d(TAG, "There is no image to display in the notification.");
             }
-            if( remoteMessage.getNotification().getBody() != null){
-                System.out.println(remoteMessage.getNotification().getBody().toString());
-            }
             if (remoteMessage.getNotification().getChannelId().equals(MainActivity.INCIDENT_CHANNEL_ID)){
                 Log.d(TAG,"Nous somme dans un canal d'incidents");
                 sendNotifIfUserConcerned(image,remoteMessage);
