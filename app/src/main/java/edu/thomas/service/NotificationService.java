@@ -27,31 +27,42 @@ public class NotificationService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if (remoteMessage.getNotification() != null) {
+            // Notification image processing
             Uri imageUri = remoteMessage.getNotification().getImageUrl();
-            String imageUrl = "";
+            Bitmap image = null;
             if(imageUri != null) {
-                Log.d(TAG, "L'image est : " + imageUri.toString());
-                // Récupère l'URL de l'image
-                imageUrl = remoteMessage.getNotification().getImageUrl().toString();
+                // If the notification contains an image, retrieve the image URL
+                String imageUrl = imageUri.toString();
+                image = getBitmapFromUrl(imageUrl);
             } else {
-                Log.d(TAG, "L'image est null.");
+                Log.d(TAG, "There is no image to display in the notification.");
             }
-            // Télécharge l'image à partir de l'URL
-            Bitmap image = getBitmapFromUrl(imageUrl);
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class); // Créé un intent pour aller sur MainActivity
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            // Send notification prépare et envoie la notification
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), MainActivity.CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_train_black_24dp)
-                    .setLargeIcon(image)
-                    .setContentTitle(remoteMessage.getNotification().getTitle())
-                    .setContentText(remoteMessage.getNotification().getBody())
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-        } else { // Numéro 0 pour l'instant (on peut les classer en fonction de leurs ids)
-            Log.d(TAG, "Le message est null.");
+            // Create and send the notification
+            sendNotification(image, remoteMessage);
+        } else {
+            Log.d(TAG, "The notification is empty.");
         }
+    }
+
+    private void sendNotification(Bitmap image, RemoteMessage remoteMessage) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class); // Create an intent to go to MainActivity
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        // Prepares and sends the notification
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), MainActivity.CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_train_black_24dp) // Thomas icon
+                .setLargeIcon(image) // Notification image
+                .setContentTitle(Objects.requireNonNull(remoteMessage.getNotification()).getTitle())
+                .setContentText(Objects.requireNonNull(remoteMessage.getNotification().getBody()))
+                .setTimeoutAfter(1800000) // 30 minutes
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+
+    @Override
+    public void onNewToken(@NonNull String token) {
+        super.onNewToken(token);
+        Log.d(TAG, "Refreshed token: " + token);
     }
 
     private Bitmap getBitmapFromUrl(String imageUrl) {
@@ -59,7 +70,7 @@ public class NotificationService extends FirebaseMessagingService {
             URL url = new URL(imageUrl);
             return BitmapFactory.decodeStream(url.openConnection().getInputStream());
         } catch (IOException e) {
-            Log.e(TAG, "Erreur lors du téléchargement de l'image", e);
+            Log.e(TAG, "Error while downloading the image", e);
             return null;
         }
     }
