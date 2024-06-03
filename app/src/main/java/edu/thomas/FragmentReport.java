@@ -176,7 +176,7 @@ public class FragmentReport extends Fragment {
                     dismissProgressDialog();
                     trains = user.getTrains();
                     List<String> trainNames = new ArrayList<>();
-                    trainNames.add("--Sélectionnez un trajet--");
+                    trainNames.add("Sélectionnez un trajet");
                     for (Train t : trains) {
                         trainNames.add(t.getTrainName());
                     }

@@ -37,34 +37,9 @@ public class FragmentTrain extends Fragment {
         fetchTrainNames(view);
         return view;
     }
-/* j'aurai besoin de cette méthode plus tard mais là je l'ai faite pour rien :joy:
-    public void fetchIncidents() {
-        db.getMiguel(new FirestoreIncidentsCallback() {
-            @Override
-            public void onIncidentsCallback(List<Incident> incidents) {
-                if (!incidents.isEmpty()) {
-                    while (trainsMiguel.isEmpty()){
-                        showProgressDialog();
-                    }
-                    for (Train t : trainsMiguel){
-                        for (Incident i : incidents){
-                            if (t.getTrainId().equals(i.getTrainId())){
-                                journeyList.add(i);
-                            }
-                        }
-                    }
-                    List<String> trainNames = new ArrayList<>();
-                    trainNames.add("--Sélectionnez un trajet--");
-                    for (Train t : trains) {
-                        trainNames.add(t.getTrainName());
-                    }
-                    updateUIWithTrainNames(trainNames,trainSpinner);
-                }
-            }
-        });
-    }
 
- */
+
+
     public void fetchTrainNames(View view) {
         showProgressDialog();
         db.getMiguel(new FirestoreMiguelCallback() {
