@@ -90,6 +90,9 @@ public class Train {
     }
 
     public int getImage(){
+        if (getTrainType() == null){
+            return R.drawable.ic_train_black_24dp;
+        }
         switch (getTrainType()){
             case "TER":
                 return R.drawable.logo_ter;

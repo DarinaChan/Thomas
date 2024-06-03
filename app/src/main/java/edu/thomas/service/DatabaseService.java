@@ -53,18 +53,16 @@ public class DatabaseService {
                 })
                 .addOnFailureListener(e -> System.out.println("Error adding document: " + e));
     }
-    public void getMiguel(final FirestoreCallback listener) {
+    public void getMiguel(final FirestoreMiguelCallback listener) {
         db.collection("users").document("ItqhRjzL6e1gNvUkz8Tj")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
-                            // Document exists, map it to a User object
                             User user = documentSnapshot.toObject(User.class);
                             listener.onMiguelCallback(user);
                         } else {
-                            // Document does not exist
                             listener.onMiguelCallback(null);
                         }
                     }
