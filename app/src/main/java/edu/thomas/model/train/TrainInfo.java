@@ -123,7 +123,7 @@ public class TrainInfo {
             case "TGV":
                 return R.drawable.logo_tgv;
             default:
-                return R.drawable.blue_train;
+                return R.drawable.logo_ter;
         }
     }
 }

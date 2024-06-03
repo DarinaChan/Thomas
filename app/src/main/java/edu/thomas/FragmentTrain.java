@@ -9,6 +9,10 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +35,12 @@ public class FragmentTrain extends Fragment {
 
         TrainAdapter adapter = new TrainAdapter(getContext(), journeyList);
         listView.setAdapter(adapter);
+
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.floating_action_button);
+        floatingActionButton.setOnClickListener(v -> {
+            NavController navController = NavHostFragment.findNavController(FragmentTrain.this);
+            navController.navigate(R.id.action_trainFragment_to_searchTrainFragment);
+        });
 
         return view;
     }

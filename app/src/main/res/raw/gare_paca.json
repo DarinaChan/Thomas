@@ -1,0 +1,532 @@
+[
+{
+  "nom": "Saint-Cyr Les Lecques - La Cadière",
+  "codes_uic": "87755215",
+  "codeinsee": "83112"
+},
+{
+"nom": "Picon Busserine",
+"codes_uic": "87759290",
+"codeinsee": "13214"
+},
+{
+"nom": "Aix-en-Provence",
+"codes_uic": "87751404",
+"codeinsee": "13001"
+},
+{
+"nom": "Gadagne",
+"codes_uic": "87765446",
+"codeinsee": "84036"
+},
+{
+"nom": "Sorgues - Châteauneuf-du-Pape",
+"codes_uic": "87765206",
+"codeinsee": "84129"
+},
+{
+"nom": "Aix-en-Provence TGV",
+"codes_uic": "87319012",
+"codeinsee": "13001"
+},
+{
+"nom": "Arenc Euroméditerranée",
+"codes_uic": "87580340",
+"codeinsee": "13202"
+},
+{
+"nom": "Miramas",
+"codes_uic": "87753004",
+"codeinsee": "13063"
+},
+{
+"nom": "Aubagne",
+"codes_uic": "87751750",
+"codeinsee": "13005"
+},
+{
+"nom": "Simiane-Collongue",
+"codes_uic": "87751438",
+"codeinsee": "13107"
+},
+{
+"nom": "Carry-le-Rouet",
+"codes_uic": "87753566",
+"codeinsee": "13021"
+},
+{
+"nom": "L'Estaque",
+"codes_uic": "87751602",
+"codeinsee": "13216"
+},
+{
+"nom": "Avignon Centre",
+"codes_uic": "87765008",
+"codeinsee": "84007"
+},
+{
+"nom": "Sainte-Marthe en Provence",
+"codes_uic": "87751842",
+"codeinsee": "13214"
+},
+{
+"nom": "Agay",
+"codes_uic": "87757559",
+"codeinsee": "83118"
+},
+{
+"nom": "La Crau",
+"codes_uic": "87755611",
+"codeinsee": "83047"
+},
+{
+"nom": "La Pomme",
+"codes_uic": "87751719",
+"codeinsee": "13211"
+},
+{
+"nom": "Saint-Maurice-de-Beynost",
+"codes_uic": "87723536",
+"codeinsee": "1376"
+},
+{
+"nom": "Port-de-Bouc",
+"codes_uic": "87753459",
+"codeinsee": "13077"
+},
+{
+"nom": "Saint-Marcel",
+"codes_uic": "87751701",
+"codeinsee": "13211"
+},
+{
+"nom": "Vrigne-Meuse",
+"codes_uic": "87172221",
+"codeinsee": "8492"
+},
+{
+"nom": "La Couronne Carro",
+"codes_uic": "87753541",
+"codeinsee": "13056"
+},
+{
+"nom": "Rassuen",
+"codes_uic": "87753426",
+"codeinsee": "13047"
+},
+{
+"nom": "Cavaillon",
+"codes_uic": "87765503",
+"codeinsee": "84035"
+},
+{
+"nom": "Poix-Terron",
+"codes_uic": "87172171",
+"codeinsee": "8341"
+},
+{
+"nom": "Cassis",
+"codes_uic": "87751776",
+"codeinsee": "13022"
+},
+{
+"nom": "Morières-lès-Avignon",
+"codes_uic": "87765420",
+"codeinsee": "84081"
+},
+{
+"nom": "Saint-Martin-du-Mont",
+"codes_uic": "87743112",
+"codeinsee": "1374"
+},
+{
+"nom": "Sedan",
+"codes_uic": "87172254",
+"codeinsee": "8409"
+},
+{
+"nom": "Fréjus - Saint-Raphael Autotrain",
+"codes_uic": "87757518",
+"codeinsee": "83061"
+},
+{
+"nom": "Le Thor",
+"codes_uic": "87765453",
+"codeinsee": "84132"
+},
+{
+"nom": "Pas des Lanciers",
+"codes_uic": "87753285",
+"codeinsee": "13054"
+},
+{
+"nom": "Carpentras",
+"codes_uic": "87765735",
+"codeinsee": "84031"
+},
+{
+"nom": "Tarascon",
+"codes_uic": "87765354",
+"codeinsee": "13108"
+},
+{
+"nom": "Septèmes-les-Vallons",
+"codes_uic": "87751800",
+"codeinsee": "13106"
+},
+{
+"nom": "Saint-Martin-de-Crau",
+"codes_uic": "87753681",
+"codeinsee": "13097"
+},
+{
+"nom": "Martigues",
+"codes_uic": "87753509",
+"codeinsee": "13056"
+},
+{
+"nom": "Saint-Raphaël Valescure",
+"codes_uic": "87757526",
+"codeinsee": "83118"
+},
+{
+"nom": "Bollène La Croisière",
+"codes_uic": "87764357",
+"codeinsee": "84019"
+},
+{
+"nom": "Pertuis",
+"codes_uic": "87751362",
+"codeinsee": "84089"
+},
+{
+"nom": "Gonfaron",
+"codes_uic": "87755397",
+"codeinsee": "83067"
+},
+{
+"nom": "Arles",
+"codes_uic": "87753657",
+"codeinsee": "13004"
+},
+{
+"nom": "Puget-Ville",
+"codes_uic": "87755363",
+"codeinsee": "83100"
+},
+{
+"nom": "Boulouris sur Mer",
+"codes_uic": "87757534",
+"codeinsee": "83118"
+},
+{
+"nom": "Pont-d'Ain",
+"codes_uic": "87743120",
+"codeinsee": "1304"
+},
+{
+"nom": "Bédarrides",
+"codes_uic": "87765198",
+"codeinsee": "84016"
+},
+{
+"nom": "Vidauban",
+"codes_uic": "87755421",
+"codeinsee": "83148"
+},
+{
+"nom": "Saint-André-de-Corcy",
+"codes_uic": "87723734",
+"codeinsee": "1333"
+},
+{
+"nom": "Les Arcs - Draguignan",
+"codes_uic": "87755447",
+"codeinsee": "83004"
+},
+{
+"nom": "Rethel",
+"codes_uic": "87172270",
+"codeinsee": "8362"
+},
+{
+"nom": "Nouvion-sur-Meuse",
+"codes_uic": "87172213",
+"codeinsee": "8327"
+},
+{
+"nom": "Avignon TGV",
+"codes_uic": "87981902;87318964",
+"codeinsee": "84007"
+},
+{
+"nom": "Nouzonville",
+"codes_uic": "87172023",
+"codeinsee": "8328"
+},
+{
+"nom": "Solliès-Pont",
+"codes_uic": "87755330",
+"codeinsee": "83130"
+},
+{
+"nom": "Istres",
+"codes_uic": "87753418",
+"codeinsee": "13047"
+},
+{
+"nom": "Saint-Chamas",
+"codes_uic": "87753202",
+"codeinsee": "13092"
+},
+{
+"nom": "Ollioules - Sanary-sur-Mer",
+"codes_uic": "87755231",
+"codeinsee": "83090"
+},
+{
+"nom": "Sénas",
+"codes_uic": "87753715",
+"codeinsee": "13105"
+},
+{
+"nom": "Vitrolles Aéroport Marseille Provence",
+"codes_uic": "87439554",
+"codeinsee": "13117"
+},
+{
+"nom": "Saint-Marcel en Dombes",
+"codes_uic": "87723742",
+"codeinsee": "1371"
+},
+{
+"nom": "Saint-Rambert-en-Bugey",
+"codes_uic": "87743740",
+"codeinsee": "1384"
+},
+{
+"nom": "Le Dramont",
+"codes_uic": "87757542",
+"codeinsee": "83118"
+},
+{
+"nom": "Gardanne",
+"codes_uic": "87751420",
+"codeinsee": "13041"
+},
+{
+"nom": "Saint-Saturnin-lès-Avignon",
+"codes_uic": "87765438",
+"codeinsee": "84119"
+},
+{
+"nom": "Lamanon",
+"codes_uic": "87753731",
+"codeinsee": "13049"
+},
+{
+"nom": "Fréjus",
+"codes_uic": "87757500",
+"codeinsee": "83061"
+},
+{
+"nom": "Vireux-Molhain",
+"codes_uic": "87172114",
+"codeinsee": "8486"
+},
+{
+"nom": "L'Isle-sur-la-Sorgue - Fontaine-de-Vaucluse",
+"codes_uic": "87765479",
+"codeinsee": "84054"
+},
+{
+"nom": "Orgon",
+"codes_uic": "87753707",
+"codeinsee": "13067"
+},
+{
+"nom": "Toulon",
+"codes_uic": "87755009",
+"codeinsee": "83137"
+},
+{
+"nom": "Courthézon",
+"codes_uic": "87765180",
+"codeinsee": "84039"
+},
+{
+"nom": "La Garde",
+"codes_uic": "87755306",
+"codeinsee": "83062"
+},
+{
+"nom": "Saint-Joseph le Castellas",
+"codes_uic": "87759316",
+"codeinsee": "13215"
+},
+{
+"nom": "Meyrargues",
+"codes_uic": "87751370",
+"codeinsee": "13059"
+},
+{
+"nom": "La Redonne Ensuès",
+"codes_uic": "87753574",
+"codeinsee": "13033"
+},
+{
+"nom": "Bandol",
+"codes_uic": "87755223",
+"codeinsee": "83009"
+},
+{
+"nom": "Salon-de-Provence",
+"codes_uic": "87753764",
+"codeinsee": "13103"
+},
+{
+"nom": "Sausset-les-Pins",
+"codes_uic": "87753558",
+"codeinsee": "13104"
+},
+{
+"nom": "Saint-Antoine",
+"codes_uic": "87751826",
+"codeinsee": "13215"
+},
+{
+"nom": "Marseille Saint-Charles",
+"codes_uic": "87751008",
+"codeinsee": "13201"
+},
+{
+"nom": "Carnoules",
+"codes_uic": "87755371",
+"codeinsee": "83033"
+},
+{
+"nom": "Montfavet",
+"codes_uic": "87765412",
+"codeinsee": "84007"
+},
+{
+"nom": "La Ciotat - Ceyreste",
+"codes_uic": "87751784",
+"codeinsee": "13028"
+},
+{
+"nom": "Croix Sainte",
+"codes_uic": "87753491",
+"codeinsee": "13056"
+},
+{
+"nom": "La Seyne - Six-Fours",
+"codes_uic": "87755264",
+"codeinsee": "83126"
+},
+{
+"nom": "Entraigues-sur-la-Sorgue",
+"codes_uic": "87765826",
+"codeinsee": "84043"
+},
+{
+"nom": "Hyères",
+"codes_uic": "87755629",
+"codeinsee": "83069"
+},
+{
+"nom": "Revin",
+"codes_uic": "87172080",
+"codeinsee": "8363"
+},
+{
+"nom": "Toulon Sainte-Musse",
+"codes_uic": "87742262",
+"codeinsee": "83137"
+},
+{
+"nom": "Le Trayas",
+"codes_uic": "87757575",
+"codeinsee": "83118"
+},
+{
+"nom": "Pignans",
+"codes_uic": "87755389",
+"codeinsee": "83092"
+},
+{
+"nom": "Orange",
+"codes_uic": "87765107",
+"codeinsee": "84087"
+},
+{
+"nom": "Monteux",
+"codes_uic": "87765818",
+"codeinsee": "84080"
+},
+{
+"nom": "Niolon",
+"codes_uic": "87753582",
+"codeinsee": "13088"
+},
+{
+"nom": "La Barasse",
+"codes_uic": "87635581",
+"codeinsee": "13055"
+},
+{
+"nom": "Cuers - Pierrefeu",
+"codes_uic": "87755355",
+"codeinsee": "83049"
+},
+{
+"nom": "La Penne-sur-Huveaune",
+"codes_uic": "87751743",
+"codeinsee": "13070"
+},
+{
+"nom": "Fos-sur-Mer",
+"codes_uic": "87753442",
+"codeinsee": "13077"
+},
+{
+"nom": "Anthéor Cap Roux",
+"codes_uic": "87757567",
+"codeinsee": "83118"
+},
+{
+"nom": "Le Luc - Le Cannet",
+"codes_uic": "87755405",
+"codeinsee": "83031"
+},
+  {
+    "nom":"La Pauline Hyères",
+    "codes_uic":"87755314",
+    "codeinsee":"83062"
+  },
+  {
+    "nom":"Rognac",
+    "codes_uic":"87753251",
+    "codeinsee":"13081"
+  },
+  {
+    "nom":"Polliat",
+    "codes_uic":"87725846",
+    "codeinsee":"1301"
+  },
+  {
+    "nom":"Marseille Blancarde",
+    "codes_uic":"87751081",
+    "codeinsee":"13204"
+  },
+  {
+    "nom":"Pougny - Chancy",
+    "codes_uic":"87745380",
+    "codeinsee":"1308"
+  },
+  {
+    "nom":"Saint-Paul-de-Varax",
+    "codes_uic":"87723783",
+    "codeinsee":"1383"
+  }
+]

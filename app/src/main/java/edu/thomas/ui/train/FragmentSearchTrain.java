@@ -1,10 +1,7 @@
 package edu.thomas.ui.train;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
@@ -37,7 +32,7 @@ import edu.thomas.model.train.TrainInfoList;
 import edu.thomas.model.train.TrainStationMap;
 
 
-public class TrainFragment extends Fragment {
+public class FragmentSearchTrain extends Fragment {
 
     private FragmentTrainBinding binding;
     private CallbackActivity callbackActivity;
@@ -47,7 +42,7 @@ public class TrainFragment extends Fragment {
 
 
 
-    public TrainFragment(){};
+    public FragmentSearchTrain(){};
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -60,7 +55,7 @@ public class TrainFragment extends Fragment {
     }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_train,container,false);
+        View root = inflater.inflate(R.layout.fragment_search_train,container,false);
         ArrayList<TrainInfo>  trainInfos = new ArrayList<>();
         trainInfos.add(new TrainInfo("11H41", "15h10", "Antibes", "Monaco", "30min", "TER"));
         trainInfos.add(new TrainInfo("11H41", "15h10", "Monaco", "Antibes", "30min", "TER", true,
