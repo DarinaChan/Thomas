@@ -49,7 +49,7 @@ import edu.thomas.users.User;
 public class MainActivity extends AppCompatActivity {
     private final int REQUEST_CALENDAR_PERMISSION = 1;
     public final String TAG = "Thomas" + getClass().getSimpleName();
-    public static final String CHANNEL_ID = "Notification channel";
+    public static final String CHANNEL_ID = "General notification channel";
     private ActivityMainBinding binding;
     DatabaseService databaseService = new DatabaseService();
     public User currentUser;
@@ -76,20 +76,19 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         // Notifications
-        String channelName = "Notification channel";
+        String channelName = "General notification channel";
         NotificationChannel channel;
         // Create channel
         channel = new NotificationChannel(CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_DEFAULT);
-        // Ask user if we can send notifications
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel);
 
-        // Get the token
+        // Get the token  in the logs
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
             if(!task.isSuccessful()) {
                 Log.d(TAG, "Failed to obtain the token : " + task.getResult());
             } else {
-                Log.d(TAG, "Token = " + task.getResult());
+                Log.d(TAG, "Firebase messaging token : " + task.getResult());
             }
         });
 
