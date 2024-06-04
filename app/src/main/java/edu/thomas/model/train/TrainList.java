@@ -13,7 +13,7 @@ public class TrainList {
     private static List<Train> searhTrainList ;
 
 
-    private TrainList() {
+    public TrainList() {
         trainList = new ArrayList<>();
         searhTrainList = new ArrayList<>();
     }
@@ -49,5 +49,7 @@ public class TrainList {
     public void clearSearchTrainList() {
         searhTrainList.clear();
     }
-
+    public List<Train> getTrainList(){
+        return trainList;
+    }
 }

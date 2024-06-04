@@ -40,32 +40,20 @@ public class IncidentModel extends Observable {
         });
     }
 
-    public void sendIncident(){
+    public void sendIncident(String desc){
         setChanged();
         if(getTrainSpinnerPosition() == 0) notifyObservers(UpdateType.MISSING_ROUTE);
         else if(getIncidentSpinnerPosition() == 0) notifyObservers(UpdateType.MISSING_CATEGORY);
         else {
             Incident incident = incidentFactory.createIncident(trains.get(trainSpinnerPosition - 1).getTrainId(),
-                    getIncidentSpinnerPosition(), getDescription()).get();
+                    getIncidentSpinnerPosition()-1, desc).get();
             databaseService.addIncident(incident);
             description = "";
             incidentSpinnerPosition = 0;
             trainSpinnerPosition = 0;
             bitmap = null;
-            addTrainToUser();
             notifyObservers(UpdateType.INCIDENT_SENT);
         }
-    }
-
-    public void addTrainToUser() {
-        databaseService.getMiguel(user -> {
-            if (user != null) {
-                Train basicTrain = new Train(new Date(), new Date(), "Antibes", "Marseille", "TER", databaseService.getIdForTrain());
-                user.addTrainToUser(basicTrain);
-                databaseService.addTrain(basicTrain);
-                databaseService.deleteAndReAddUser(user);
-            }
-        });
     }
 
     public void setBitmap(Bitmap bitmap) {

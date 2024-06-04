@@ -69,7 +69,8 @@ public class IncidentView implements Observer {
         });
 
         layout.findViewById(R.id.addIncident).setOnClickListener(v -> {
-            controller.userActionClickAddIncident();
+            String desc = description.getText().toString();
+            controller.userActionClickAddIncident(desc);
         });
     }
 

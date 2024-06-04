@@ -41,9 +41,6 @@ public class DatabaseService {
                 .addOnSuccessListener(documentReference -> System.out.println("DocumentSnapshot added with ID: "  +  documentReference.getId()))
                 .addOnFailureListener(e -> System.out.println("Error adding document" + e));
     }
-    public List<Incident> getIncidents(){
-        return db.collection("incidents").get().getResult().toObjects(Incident.class);
-    }
 
     public void addUser(User u) {
         db.collection("users")

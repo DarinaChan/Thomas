@@ -60,8 +60,8 @@ public class IncidentController {
         }
     }
 
-    public void userActionClickAddIncident() {
-        model.sendIncident();
+    public void userActionClickAddIncident(String desc) {
+        model.sendIncident(desc);
     }
 
     public void takePicture() {

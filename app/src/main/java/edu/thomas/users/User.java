@@ -60,11 +60,11 @@ public class User {
         this.firstName = firstName;
         //this.id = databaseService.getIdForUser();
         this.id = "0";
-        //databaseService.addUser(this);
+        databaseService.addUser(this);
     }
     public void addTrainToUser(Train train){
         this.trains.add(train);
-        databaseService.addUser(this);
+        databaseService.deleteAndReAddUser(this);
     }
     public User(){
         // Need this for firebase
