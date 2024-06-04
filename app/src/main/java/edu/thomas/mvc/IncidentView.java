@@ -16,7 +16,7 @@ import java.util.Observer;
 
 import edu.thomas.R;
 
-public class IncidentView implements IView, Observer {
+public class IncidentView implements Observer {
     private final IncidentController controller;
     private final IncidentModel model;
     private ProgressDialog progressDialog;

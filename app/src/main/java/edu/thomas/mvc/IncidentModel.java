@@ -13,7 +13,7 @@ import edu.thomas.model.incident.TypeOfIncident;
 import edu.thomas.service.DatabaseService;
 import edu.thomas.users.Train;
 
-public class IncidentModel extends Observable implements IModel {
+public class IncidentModel extends Observable {
     private final DatabaseService databaseService;
     private final IncidentFactory incidentFactory = new IncidentFactory();
     private Bitmap bitmap;
