@@ -20,6 +20,7 @@ import edu.thomas.CallbackActivity;
 import edu.thomas.R;
 import edu.thomas.model.train.TrainList;
 import edu.thomas.service.DatabaseService;
+import edu.thomas.service.FirestoreMiguelCallback;
 import edu.thomas.users.Train;
 import edu.thomas.users.User;
 
@@ -28,6 +29,7 @@ public class SearchTrainAdapter extends BaseAdapter  implements SearchTrainListe
     private final CallbackActivity activity;
     private final LayoutInflater inflater;
 
+    private final DatabaseService db = new DatabaseService();
     List<Train> train;
 
     public SearchTrainAdapter(CallbackActivity Callback){
@@ -102,6 +104,7 @@ public class SearchTrainAdapter extends BaseAdapter  implements SearchTrainListe
     @Override
     public void onClickNom(Train item, TextView display) {
         TrainList.getInstance().addTrain(item);
+        addTrainToUser(item);
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         alertDialog.setTitle("Train ajouté");
         alertDialog.setMessage("Le train "+item.getDepartureWhere()+"-"+item.getArrivalWhere()+" a été ajouté à votre liste de train");
@@ -115,6 +118,18 @@ public class SearchTrainAdapter extends BaseAdapter  implements SearchTrainListe
     }
 
 
+    public void addTrainToUser(Train train) {
+        db.getMiguel(new FirestoreMiguelCallback() {
+            @Override
+            public void onMiguelCallback(User user) {
+                if (user != null) {
+                    user.addTrainToUser(train);
+                    db.addTrain(train);
+                    db.deleteAndReAddUser(user);
+                }
+            }
+        });
+    }
 
 }
 
