@@ -54,7 +54,7 @@ public class FragmentTrain extends Fragment {
             @Override
             public void onMiguelCallback(User user) {
                 if (user != null) {
-                    TrainList.getInstance().addAllSearchTrain(user.getTrains());
+                    TrainList.getInstance().addAllTrain(user.getTrains());
                     dismissProgressDialog();
                     updateUiWithTrainNames(view);
                 }
