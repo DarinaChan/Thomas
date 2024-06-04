@@ -1,5 +1,6 @@
 package edu.thomas;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -34,7 +35,7 @@ import edu.thomas.model.incident.Incident;
 import edu.thomas.model.incident.IncidentFactory;
 import edu.thomas.model.incident.TypeOfIncident;
 import edu.thomas.service.DatabaseService;
-import edu.thomas.service.FirestoreCallback;
+import edu.thomas.service.FirestoreMiguelCallback;
 import edu.thomas.users.Train;
 import edu.thomas.users.User;
 
@@ -48,6 +49,7 @@ public class FragmentReport extends Fragment {
     String trainId = "";
     List<Train> trains;
     int trainSpinnerPosition = 0;
+    private ProgressDialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -166,13 +168,15 @@ public class FragmentReport extends Fragment {
         imageView.setImageBitmap(bitmap);
     }
     public void fetchTrainNames(Spinner trainSpinner) {
-        db.getMiguel(new FirestoreCallback() {
+        showProgressDialog();
+        db.getMiguel(new FirestoreMiguelCallback() {
             @Override
             public void onMiguelCallback(User user) {
                 if (user != null) {
+                    dismissProgressDialog();
                     trains = user.getTrains();
                     List<String> trainNames = new ArrayList<>();
-                    trainNames.add("--Sélectionnez un trajet--");
+                    trainNames.add("Sélectionnez un trajet");
                     for (Train t : trains) {
                         trainNames.add(t.getTrainName());
                     }
@@ -182,7 +186,7 @@ public class FragmentReport extends Fragment {
         });
     }
     public void addTrainToUser() {
-        db.getMiguel(new FirestoreCallback() {
+        db.getMiguel(new FirestoreMiguelCallback() {
             @Override
             public void onMiguelCallback(User user) {
                 if (user != null) {
@@ -199,5 +203,18 @@ public class FragmentReport extends Fragment {
         ArrayAdapter<String> trainAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, trainNames);
         trainAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         trainSpinner.setAdapter(trainAdapter);
+    }
+    private void showProgressDialog() {
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+    private void dismissProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }

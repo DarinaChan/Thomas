@@ -36,11 +36,23 @@ public class User {
     public void setId(String id) {
         this.id = id;
     }
+    public void setHasNotifications(boolean n){hasNotifications = n;}
+    public boolean getHasNotifications(){return hasNotifications;}
+    public boolean getIsPMR() {
+        return isPMR;
+    }
+
+    public void setIsPMR(boolean PMR) {
+        isPMR = PMR;
+    }
 
     private String name;
     private String firstName;
     private List<Train> trains = new ArrayList<>();
     private String id;
+    private boolean hasNotifications;
+
+    private boolean isPMR;
     DatabaseService databaseService = new DatabaseService();
 
     public User(String name, String firstName){

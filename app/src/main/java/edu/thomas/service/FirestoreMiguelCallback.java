@@ -1,9 +1,7 @@
 package edu.thomas.service;
 
-import java.util.List;
-
 import edu.thomas.users.User;
 
-public interface FirestoreCallback {
+public interface FirestoreMiguelCallback {
     void onMiguelCallback(User user);
 }
