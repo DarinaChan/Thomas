@@ -16,7 +16,7 @@ import java.util.Observer;
 
 import edu.thomas.R;
 
-public class IncidentView implements IView, Observer {
+public class IncidentView implements Observer {
     private final IncidentController controller;
     private final IncidentModel model;
     private ProgressDialog progressDialog;
@@ -24,7 +24,6 @@ public class IncidentView implements IView, Observer {
     private final TextInputEditText description;
     private final Spinner incidentSpinner;
     private final Spinner trainSpinner;
-
 
     public IncidentView(View layout, IncidentController controller, IncidentModel model) {
         this.model = model;

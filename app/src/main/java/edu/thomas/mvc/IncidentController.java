@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat;
 import edu.thomas.IPictureActivity;
 import edu.thomas.model.incident.TypeOfIncident;
 
-public class IncidentController implements IController {
+public class IncidentController {
     private IncidentView view;
     private IncidentModel model;
     private final Context context;
@@ -24,7 +24,6 @@ public class IncidentController implements IController {
         this.activity = activity;
     }
 
-    @Override
     public void userActionClickCamera() {
         if(ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(activity, new String[] {android.Manifest.permission.CAMERA}, IPictureActivity.REQUEST_CAMERA);
@@ -34,7 +33,6 @@ public class IncidentController implements IController {
         }
     }
 
-    @Override
     public void userActionClickGallery() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_DENIED) {
