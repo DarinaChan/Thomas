@@ -1,5 +1,8 @@
 package edu.thomas.users;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -8,7 +11,9 @@ import edu.thomas.R;
 import edu.thomas.service.DatabaseService;
 
 public class Train {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd'T'HHmmss")
     private Date departureAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd'T'HHmmss")
     private Date arrivalAt;
     private String departureWhere;
     private String arrivalWhere;
@@ -23,12 +28,28 @@ public class Train {
     public void setDepartureAt(Date departureAt) {
         this.departureAt = departureAt;
     }
+    public void setDepartureAtString(String departureAt){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.FRANCE);
+        try {
+            this.departureAt = dateFormat.parse(departureAt);
+        } catch (ParseException e) {
+        }
+    }
 
     public Date getArrivalAt() { return arrivalAt;}
 
     public void setArrivalAt(Date arrivalAt) {
         this.arrivalAt = arrivalAt;
     }
+    public void getArrivalAtString(String departureAt){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.FRANCE);
+        try {
+            this.arrivalAt = dateFormat.parse(departureAt);
+        } catch (ParseException e) {
+        }
+    }
+
+
     public String getDepartureWhere() {
         return departureWhere;
     }
@@ -89,6 +110,13 @@ public class Train {
         return new String[]{formattedDate, formattedTime};
     }
 
+    public String getTravelTime() {
+        long diffInMillis = arrivalAt.getTime() - departureAt.getTime();
+        long hours = diffInMillis / (1000 * 60 * 60);
+        long minutes = (diffInMillis / (1000 * 60)) % 60;
+
+        return String.format(Locale.FRANCE, "%02d:%02d", hours, minutes);
+    }
     public int getImage(){
         if (getTrainType() == null){
             return R.drawable.ic_train_black_24dp;

@@ -1,56 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_search_train"
-    android:layout_width="360dp"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_gravity="center_horizontal">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:backgroundTint="@color/grey"
+    android:layout_height="match_parent"
+    tools:context=".ui.train.FragmentSearchTrain">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/champObligatoire"
+        android:layout_width="wrap_content"
+        android:layout_margin="15dp"
         android:layout_height="wrap_content"
-        android:width="350sp"
-        android:textColor="@color/dark_grey"
-        android:textAlignment="viewStart"
-        android:layout_marginBottom="24sp"
-        android:text="@string/required_fields" />
+        android:text="@string/champs_obligatoire"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/departure"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="64dp"
-        android:minWidth="350dp"
-        android:paddingBottom="8sp"
-        android:hint="@string/departure_station">
-        <com.google.android.material.textfield.TextInputEditText
+        android:layout_margin="15dp"
+
+        android:id="@+id/champDepart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/champObligatoire">
+
+        <ImageView
+            android:id="@+id/imageViewDepart"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:src="@drawable/ic_train_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextDepart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextDepart" />
+
+        <AutoCompleteTextView
+            android:id="@+id/editTextDepart"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:hint="Depart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDepart"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/arrival"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="64dp"
-        android:minWidth="350dp"
-        android:paddingBottom="24sp"
-        android:hint="@string/arrival_station">
-        <com.google.android.material.textfield.TextInputEditText
+        android:layout_margin="15dp"
+        android:id="@+id/champArrivee"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/champDepart">
+
+        <ImageView
+            android:id="@+id/imageViewArrivee"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:src="@drawable/ic_train_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextArrivee"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextArrivee" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/editTextArrivee"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:hint="Arrivee"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewArrivee"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:textAllCaps="false"
-        android:id="@+id/abandonedLuggage"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bouton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:width="350dp"
-        android:height="64dp"
-        android:text="@string/search_my_journey" />
-</LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/champArrivee">
+
+
+        <Button
+            android:id="@+id/date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="date"
+            android:tag="datePicker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/time_picker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="heure"
+            android:tag="timePicker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/rounded_background_blue"
+            android:src="@drawable/ic_search_24dp"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/time_picker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listVue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bouton" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pb_layout"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/rounded_background_white">
+
+    <!--TODO a rendre barré -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heureDepart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="11h14"
+        android:textColor="@color/grey"
+        android:layout_margin="5dp"
+        />
+
+    <TextView
+        android:id="@+id/nouvelleHeureDepart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="11h41"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/heureDepart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/gareDepart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:text="Antibes"
+        app:layout_constraintStart_toEndOf="@+id/nouvelleHeureDepart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/heureArrivee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="15h01"
+        android:textColor="@color/grey"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heureDepart" />
+
+
+    <TextView
+        android:id="@+id/nouvelleHeureArrivee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="15h10"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/heureArrivee"
+        app:layout_constraintTop_toBottomOf="@+id/heureDepart" />
+
+
+    <TextView
+        android:id="@+id/gareArrivé"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monaco - Monte-Carlo"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintStart_toStartOf="@+id/gareDepart"
+        app:layout_constraintTop_toBottomOf="@+id/gareDepart"
+        app:layout_constraintVertical_bias="0.513" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dureeTrajet"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="50 min"
+        android:layout_margin="5dp"
+        />
+
+    <ImageView
+        android:id="@+id/imgTrain"
+        android:layout_width="100px"
+        android:layout_height="50px"
+        android:layout_marginEnd="7dp"
+        android:src="@drawable/logo_ter"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dureeTrajet" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@drawable/rounded_background_white"
+        android:backgroundTint="@color/light_blue"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/constraintLayout"
+        tools:layout_editor_absoluteX="20dp">
+
+        <TextView
+            android:id="@+id/textRetard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Train en retard de 20 minutes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

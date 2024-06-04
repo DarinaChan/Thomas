@@ -1,17 +1,5 @@
 package edu.thomas;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import static edu.thomas.IPictureActivity.REQUEST_CAMERA;
 import static edu.thomas.IPictureActivity.REQUEST_GALLERY;
 
@@ -23,10 +11,15 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Toast;
+import android.Manifest;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -43,11 +36,13 @@ import java.util.List;
 import java.util.Objects;
 
 import edu.thomas.databinding.ActivityMainBinding;
+import edu.thomas.model.train.TrainList;
+import edu.thomas.model.train.TrainStationMap;
 import edu.thomas.service.DatabaseService;
 import edu.thomas.users.Train;
 import edu.thomas.users.User;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements CallbackActivity {
     private final int REQUEST_CALENDAR_PERMISSION = 1;
     public final String TAG = "Thomas" + getClass().getSimpleName();
 
@@ -65,7 +60,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestCalendarPermission();
+        TrainStationMap.getInstance(this);
+        TrainList tr = TrainList.getInstance();
+
+                requestCalendarPermission();
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
@@ -77,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_train, R.id.navigation_tickets, R.id.navigation_report, R.id.navigation_profile)
                 .build();
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_activity_main);
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Firebase messaging token : " + task.getResult());
             }
         });
+        tr.addTrain(new Train(new Date(1663981200000L), new Date(1663983300000L), "Antibes", "Nice", "TGV", "123"));
+        tr.addTrain(new Train(new Date(1671895800000L), new Date(1671897000000L), "Nice", "Monaco", "TER", "456"));
 
 //         Add some basic informations in the db
 //        User basicUser = new User("Miguel", "Rodrigo");
@@ -200,5 +202,9 @@ public class MainActivity extends AppCompatActivity {
             fr = (FragmentReport) fragments.get(0);
         }
         return fr;
+    }
+    @Override
+    public void filter(int value) {
+
     }
 }
