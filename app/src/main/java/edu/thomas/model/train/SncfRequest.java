@@ -1,5 +1,6 @@
 package edu.thomas.model.train;
 
+import android.credentials.Credential;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -8,9 +9,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import edu.thomas.CredentialsKey;
+
 public class SncfRequest {
     private final String TAG = "THOMAS "+getClass().getSimpleName();
-    String token = "7d90ab5d-28f4-41de-8766-62be280bb1d1";
+    String token = CredentialsKey.API_KEY;
 
     String gareDepart;
 
@@ -82,8 +85,7 @@ public class SncfRequest {
     }
 
     public String getURL(){
-        //return "https://api.sncf.com/v1/coverage/sncf/journeys?from=stop_area%3ASNCF%3A"+getCodeFromName(gareDepart)+"&to=stop_area%3ASNCF%3A"+getCodeFromName(gareArrive)+"&datetime="+getDate()+"&count=1&max_nb_transfers=0&mode[]=train";
-        return  "https://api.sncf.com/v1/coverage/sncf/journeys?from=stop_area%3ASNCF%3A87751743&to=stop_area%3ASNCF%3A87751750&datetime=20240605T125700&count=1&max_nb_transfers=0&mode[]=train";
+        return "https://api.sncf.com/v1/coverage/sncf/journeys?from=stop_area%3ASNCF%3A"+getCodeFromName(gareDepart)+"&to=stop_area%3ASNCF%3A"+getCodeFromName(gareArrive)+"&datetime="+getDate()+"&count=1&max_nb_transfers=0&mode[]=train";
     }
 
     //https://api.navitia.io/v1/coverage/sncf/journeys?to=stop_area%3ASNCF%3A87686006&from=stop_area%3ASNCF%3A87751008&count=1

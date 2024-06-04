@@ -12,26 +12,39 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import edu.thomas.CallbackActivity;
 import edu.thomas.R;
 import edu.thomas.model.train.TrainList;
+import edu.thomas.service.DatabaseService;
+import edu.thomas.service.FirestoreCallback;
 import edu.thomas.users.Train;
+import edu.thomas.users.User;
 
-public class bulleHoraireAdapter extends BaseAdapter  implements bulleHoraireListener{
+public class SearchTrainAdapter extends BaseAdapter  implements SearchTrainListener {
     private final String TAG = "THOMAS "+getClass().getSimpleName();
-
+    DatabaseService db;
     private final CallbackActivity activity;
     private final LayoutInflater inflater;
+
     List<Train> train;
 
-    public bulleHoraireAdapter(CallbackActivity Callback){
+    public SearchTrainAdapter(CallbackActivity Callback){
         this.activity = Callback;
         inflater = LayoutInflater.from((Context) activity);
-        train = TrainList.getInstance().getTrainInfoList();
+        train = TrainList.getInstance().getSearhTrainList();
     }
+
+    public SearchTrainAdapter(CallbackActivity Callback, List<Train> trainMockup){
+        this.activity = Callback;
+        inflater = LayoutInflater.from((Context) activity);
+        train = trainMockup;
+        this.db = db;
+    }
+
 
 
     @Override
@@ -76,21 +89,18 @@ public class bulleHoraireAdapter extends BaseAdapter  implements bulleHoraireLis
                 calendarArrival.get(Calendar.HOUR_OF_DAY),
                 calendarArrival.get(Calendar.MINUTE));
 
-        Calendar calendarDuree = Calendar.getInstance();
-        calendarDuree.setTime(tr.getTravelTime());
-        String dureeTempsTrajet = String.format(Locale.FRANCE, "%02d:%02d",
-                calendarArrival.get(Calendar.HOUR_OF_DAY),
-                calendarArrival.get(Calendar.MINUTE));
+
         heureDepart.setText(depart);
         heureArrive.setText(arrive);
         gareDepart.setText(tr.getDepartureWhere());
         gareArrive.setText(tr.getArrivalWhere());
-        dureeTrajet.setText(dureeTempsTrajet);
+        dureeTrajet.setText(tr.getTravelTime());
         imageTrain.setImageResource(tr.getImage());
 
 
         return layoutItem;
     }
+
 
     @Override
     public void onClickNom(Train item, TextView display) {
@@ -106,6 +116,7 @@ public class bulleHoraireAdapter extends BaseAdapter  implements bulleHoraireLis
     public Context getContext() {
         return inflater.getContext();
     }
+
 }
 
 

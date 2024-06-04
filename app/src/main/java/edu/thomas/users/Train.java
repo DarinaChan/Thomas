@@ -28,7 +28,7 @@ public class Train {
     public void setDepartureAt(Date departureAt) {
         this.departureAt = departureAt;
     }
-    public void setzzz(String departureAt){
+    public void setDepartureAtString(String departureAt){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.FRANCE);
         try {
             this.departureAt = dateFormat.parse(departureAt);
@@ -41,7 +41,7 @@ public class Train {
     public void setArrivalAt(Date arrivalAt) {
         this.arrivalAt = arrivalAt;
     }
-    public void setzz(String departureAt){
+    public void getArrivalAtString(String departureAt){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.FRANCE);
         try {
             this.arrivalAt = dateFormat.parse(departureAt);
@@ -110,10 +110,13 @@ public class Train {
         return new String[]{formattedDate, formattedTime};
     }
 
-    public Date getTravelTime(){
-        return new Date(arrivalAt.getTime() - departureAt.getTime());
-    }
+    public String getTravelTime() {
+        long diffInMillis = arrivalAt.getTime() - departureAt.getTime();
+        long hours = diffInMillis / (1000 * 60 * 60);
+        long minutes = (diffInMillis / (1000 * 60)) % 60;
 
+        return String.format(Locale.FRANCE, "%02d:%02d", hours, minutes);
+    }
     public int getImage(){
         switch (getTrainType()){
             case "TER":

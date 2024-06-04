@@ -10,8 +10,12 @@ public class TrainList {
     private static volatile TrainList instance = null;
     private static List<Train> trainList;
 
+    private static List<Train> searhTrainList ;
+
+
     private TrainList() {
         trainList = new ArrayList<>();
+        searhTrainList = new ArrayList<>();
     }
 
     public static TrainList getInstance() {
@@ -36,4 +40,14 @@ public class TrainList {
     public void addAllTrain(List<Train> trainInfoList) {
         trainList.addAll(trainInfoList);
     }
+    public void addAllSearchTrain(List<Train> trainInfoList) {
+        searhTrainList.addAll(trainInfoList);
+    }
+    public  List<Train> getSearhTrainList() {
+        return Collections.unmodifiableList(searhTrainList);
+    }
+    public void clearSearchTrainList() {
+        searhTrainList.clear();
+    }
+
 }

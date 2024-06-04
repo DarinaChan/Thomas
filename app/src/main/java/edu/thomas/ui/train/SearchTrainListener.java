@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import edu.thomas.users.Train;
 
-public interface bulleHoraireListener {
+public interface SearchTrainListener {
         void onClickNom(Train item, TextView display);
         Context getContext();
     }

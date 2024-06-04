@@ -58,8 +58,12 @@ public class FragmentSearchTrain extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_search_train,container,false);
+        ArrayList<Train> list = new ArrayList();
+        list.add(new Train(new Date(1663981200000L), new Date(1663983300000L), "Paris", "Marseille", "TGV", "123"));
+        list.add(new Train(new Date(1671895800000L), new Date(1671897000000L), "Nice", "Aubagne", "TER", "456"));
 
-        bulleHoraireAdapter adapter = new bulleHoraireAdapter(callbackActivity);
+
+        SearchTrainAdapter adapter = new SearchTrainAdapter(callbackActivity,list);
         ((ListView)root.findViewById(R.id.listVue)).setAdapter(adapter);
         Button datePicker = root.findViewById(R.id.date_picker);
         Button timePicker = root.findViewById(R.id.time_picker);
@@ -106,7 +110,8 @@ public class FragmentSearchTrain extends Fragment {
                 HttpAsyncGet<Train> request = new HttpAsyncGet<>(detail, Train.class, new PostExecuteActivity() {
                     @Override
                     public void onPostExecute(List itemList) {
-
+                        TrainList.getInstance().clearSearchTrainList();
+                        TrainList.getInstance().addAllSearchTrain(itemList);
                     }
 
                     @Override

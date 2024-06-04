@@ -77,8 +77,8 @@ public class HttpAsyncGet<T>{
             for (JsonNode journey : journeys) {
                 Train trainJourney = new Train();
 
-                trainJourney.setzzz(journey.path("departure_date_time").asText());
-                trainJourney.setzz((journey.path("arrival_date_time").asText()));
+                trainJourney.setDepartureAtString(journey.path("departure_date_time").asText());
+                trainJourney.getArrivalAtString((journey.path("arrival_date_time").asText()));
 
                 JsonNode sections = journey.path("sections");
                 for (JsonNode section : sections) {
