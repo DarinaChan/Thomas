@@ -105,21 +105,6 @@ public class MainActivity extends AppCompatActivity  implements CallbackActivity
         tr.addTrain(new Train(new Date(1663981200000L), new Date(1663983300000L), "Antibes", "Nice", "TGV", "123"));
         tr.addTrain(new Train(new Date(1671895800000L), new Date(1671897000000L), "Nice", "Monaco", "TER", "456"));
 
-//         Add some basic informations in the db
-//        User basicUser = new User("Miguel", "Rodrigo");
-//        Train basicTrain = new Train(new Date(),"Rouen","Lyon",databaseService.getIdForTrain());
-//        currentUser = basicUser;
-//        currentUser.addTrainToUser(basicTrain);
-//        currentUser.addTrainToUser(basicTrain);
-//
-//        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
-//            if(!task.isSuccessful()) {
-//                Log.d(TAG, "Failed to obtain the token : " + task.getResult());
-//            } else {
-//                Log.d(TAG, "Token = " + task.getResult());
-//            }
-//        });
-
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -11,16 +11,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import edu.thomas.IPictureActivity;
+import edu.thomas.model.incident.TypeOfIncident;
 
 public class IncidentController implements IController {
-    private final IView view;
-    private final IModel model;
+    private IncidentView view;
+    private IncidentModel model;
     private final Context context;
     private final Activity activity;
 
-    public IncidentController(IView view, IModel model, Context context, Activity activity) {
-        this.view = view;
-        this.model = model;
+    public IncidentController(Context context, Activity activity) {
         this.context = context;
         this.activity = activity;
     }
@@ -52,6 +51,21 @@ public class IncidentController implements IController {
         }
     }
 
+    public void userActionSelectTrainSpinner(int position) {
+        model.setTrainSpinnerPosition(position);
+    }
+
+    public void userActionSelectIncidentSpinner(int position) {
+        model.setIncidentSpinnerPosition(position);
+        if (position == TypeOfIncident.TrainOnTime.ordinal() + 1) { // Un train n'est jamais à l'heure
+            view.easterEgg();
+        }
+    }
+
+    public void userActionClickAddIncident() {
+        model.sendIncident();
+    }
+
     public void takePicture() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         activity.startActivityForResult(intent, IPictureActivity.REQUEST_CAMERA);
@@ -60,5 +74,17 @@ public class IncidentController implements IController {
     public void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         activity.startActivityForResult(intent, IPictureActivity.REQUEST_GALLERY);
+    }
+
+    public Context getContext() {
+        return this.context;
+    }
+
+    public void setModel(IncidentModel model) {
+        this.model = model;
+    }
+
+    public void setView(IncidentView view) {
+        this.view = view;
     }
 }
