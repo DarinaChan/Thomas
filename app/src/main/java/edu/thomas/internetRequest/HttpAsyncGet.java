@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.util.Log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedInputStream;
@@ -15,10 +16,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 import edu.thomas.model.train.SncfRequest;
+import edu.thomas.users.Train;
 
 /**
  * construit un Objet T depuis un fichier json dont l'adress URL est passé en paramètre
@@ -30,7 +33,6 @@ public class HttpAsyncGet<T>{
     private final Class<T> clazz;
     private List<T> itemList;
     private final HttpHandler webService;
-
 
     public HttpAsyncGet(SncfRequest request, Class<T> clazz, PostExecuteActivity postExecuteActivity, ProgressDialog progressDialog) {
         super();
@@ -47,19 +49,10 @@ public class HttpAsyncGet<T>{
         Executors.newSingleThreadExecutor().execute( runnable );
     }
 
-
     public void doInBackGround(SncfRequest request){
         // get the jsonStr to parse
         String jsonStr = webService.makeServiceCall(request);
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            //todo:  itemList = mapper.readValue(jsonStr, new TypeReference<List<T>>(){});   was not possible
-            //       the previous line provided List<Object> instead of List<T>
-            //       because "l'argument List<T> dans new TypeReference<List<T>>(){} est un type générique non résolu".
-            itemList = mapper.readValue(jsonStr, mapper.getTypeFactory().constructCollectionType(List.class, clazz));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        itemList = (List<T>) extractTrainJourneys(jsonStr);
     }
 
     public List<T> getItemResult() {
@@ -72,6 +65,46 @@ public class HttpAsyncGet<T>{
         progressDialog.show();
     }
 
+    // Méthode pour extraire les informations spécifiques des trajets en train
+    private List<Train> extractTrainJourneys(String jsonStr) {
+        ObjectMapper mapper = new ObjectMapper();
+        List<Train> trainJourneys = new ArrayList<>();
+
+        try {
+            JsonNode root = mapper.readTree(jsonStr);
+            JsonNode journeys = root.path("journeys");
+
+            for (JsonNode journey : journeys) {
+                Train trainJourney = new Train();
+
+                trainJourney.setzzz(journey.path("departure_date_time").asText());
+                trainJourney.setzz((journey.path("arrival_date_time").asText()));
+
+                JsonNode sections = journey.path("sections");
+                for (JsonNode section : sections) {
+                    if (section.path("mode").asText().equals("train")) {
+                        trainJourney.setDepartureWhere(section.path("from").path("name").asText());
+                        trainJourney.setArrivalWhere(section.path("to").path("name").asText());
+
+                        JsonNode displayInformations = section.path("display_informations");
+                        trainJourney.setTrainId(displayInformations.path("trip_short_name").asText());
+                        trainJourney.setTrainType(displayInformations.path("commercial_mode").asText());
+                        trainJourney.setTrainName(displayInformations.path("headsign").asText());
+
+                        break; // Exit the loop since we only need the train section
+                    }
+                }
+                trainJourneys.add(trainJourney);
+            }
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return trainJourneys;
+    }
+
     static class HttpHandler { //innerClass
 
         public String makeServiceCall(SncfRequest request ) {
@@ -79,7 +112,7 @@ public class HttpAsyncGet<T>{
             try {
                 HttpURLConnection connection = (HttpURLConnection) new URL(request.getURL()).openConnection();
                 connection.setRequestMethod("GET");
-                connection.setRequestProperty("Authorization","Bearer "+request.getToken());
+                connection.setRequestProperty("Authorization",request.getToken());
                 // lecture du fichier
                 InputStream inputStream = new BufferedInputStream(connection.getInputStream());
                 response = convertStreamToString(inputStream);
@@ -88,6 +121,7 @@ public class HttpAsyncGet<T>{
             } catch (ProtocolException e) {
                 Log.e(TAG, "ProtocolException: " + e.getMessage());
             } catch (IOException e) {
+
                 Log.e(TAG, "IOException: " + e.getMessage());
             } catch (Exception e) {
                 Log.e(TAG, "Exception: " + e.getMessage());
@@ -106,7 +140,9 @@ public class HttpAsyncGet<T>{
                     Log.e(TAG,line);
                 }
             }
-            catch (IOException e) {  e.printStackTrace();   }
+            catch (IOException e) {
+                Log.d(TAG, "convertStreamToString: ici");
+                e.printStackTrace();   }
             finally {
                 try { inputStream.close(); } catch (IOException e) { e.printStackTrace();  }
             }

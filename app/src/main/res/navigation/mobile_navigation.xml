@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/mobile_navigation"
-        app:startDestination="@+id/navigation_train">
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_train">
 
-        <!-- Root views -->
-        <fragment
-            android:id="@+id/navigation_train"
-            android:name="edu.thomas.FragmentTrain"
-            android:label="Train Fragment"
-            tools:layout="@layout/fragment_train">
-            <action
-                android:id="@+id/action_trainFragment_to_searchTrainFragment"
-                app:destination="@id/searchTrainFragment" />
-        </fragment>
+    <!-- Root views -->
+    <fragment
+        android:id="@+id/navigation_train"
+        android:name="edu.thomas.FragmentTrain"
+        android:label="Train Fragment"
+        tools:layout="@layout/fragment_train">
+        <action
+            android:id="@+id/action_trainFragment_to_searchTrainFragment"
+            app:destination="@id/searchTrainFragment" />
+    </fragment>
 
-        <fragment
-            android:id="@+id/searchTrainFragment"
-            android:name="edu.thomas.ui.train.FragmentSearchTrain"
-            android:label="Search Train Fragment"
-            tools:layout="@layout/fragment_search_train" />
+    <fragment
+        android:id="@+id/searchTrainFragment"
+        android:name="edu.thomas.ui.train.FragmentSearchTrain"
+        android:label="Search Train Fragment"
+        tools:layout="@layout/fragment_search_train" />
 
-        <fragment
-            android:id="@+id/navigation_tickets"
-            android:name="edu.thomas.FragmentTickets"
-            android:label="@string/import_a_ticket"
-            tools:layout="@layout/fragment_tickets" />
+    <fragment
+        android:id="@+id/navigation_tickets"
+        android:name="edu.thomas.FragmentTickets"
+        android:label="@string/import_a_ticket"
+        tools:layout="@layout/fragment_tickets" />
 
-        <fragment
-            android:id="@+id/navigation_report"
-            android:name="edu.thomas.FragmentReport"
-            android:label="@string/report_an_incident"
-            tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/navigation_report"
+        android:name="edu.thomas.FragmentReport"
+        android:label="@string/report_an_incident"
+        tools:layout="@layout/fragment_report" />
 
-        <fragment
-            android:id="@+id/navigation_profile"
-            android:name="edu.thomas.FragmentProfile"
-            android:label="@string/my_profile"
-            tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="edu.thomas.FragmentProfile"
+        android:label="@string/my_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

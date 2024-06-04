@@ -82,7 +82,8 @@ public class SncfRequest {
     }
 
     public String getURL(){
-        return "https://api.sncf.com/v1/coverage/sncf/journeys?from=stop_area%3ASNCF%3A"+getCodeFromName(gareDepart)+"&to=stop_area%3ASNCF%3A"+getCodeFromName(gareArrive)+"&datetime="+getDate()+"&count=4";
+        //return "https://api.sncf.com/v1/coverage/sncf/journeys?from=stop_area%3ASNCF%3A"+getCodeFromName(gareDepart)+"&to=stop_area%3ASNCF%3A"+getCodeFromName(gareArrive)+"&datetime="+getDate()+"&count=1&max_nb_transfers=0&mode[]=train";
+        return  "https://api.sncf.com/v1/coverage/sncf/journeys?from=stop_area%3ASNCF%3A87751743&to=stop_area%3ASNCF%3A87751750&datetime=20240605T125700&count=1&max_nb_transfers=0&mode[]=train";
     }
 
     //https://api.navitia.io/v1/coverage/sncf/journeys?to=stop_area%3ASNCF%3A87686006&from=stop_area%3ASNCF%3A87751008&count=1

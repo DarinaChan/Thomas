@@ -1,5 +1,6 @@
 package edu.thomas.ui.train;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edu.thomas.CallbackActivity;
@@ -27,9 +29,9 @@ import edu.thomas.databinding.FragmentTrainBinding;
 import edu.thomas.internetRequest.HttpAsyncGet;
 import edu.thomas.internetRequest.PostExecuteActivity;
 import edu.thomas.model.train.SncfRequest;
-import edu.thomas.model.train.TrainInfo;
-import edu.thomas.model.train.TrainInfoList;
+import edu.thomas.model.train.TrainList;
 import edu.thomas.model.train.TrainStationMap;
+import edu.thomas.users.Train;
 
 
 public class FragmentSearchTrain extends Fragment {
@@ -56,12 +58,8 @@ public class FragmentSearchTrain extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_search_train,container,false);
-        ArrayList<TrainInfo>  trainInfos = new ArrayList<>();
-        trainInfos.add(new TrainInfo("11H41", "15h10", "Antibes", "Monaco", "30min", "TER"));
-        trainInfos.add(new TrainInfo("11H41", "15h10", "Monaco", "Antibes", "30min", "TER", true,
-                "Train en retard de 20 min ", "12h00", "16h00"));
 
-        bulleHoraireAdapter adapter = new bulleHoraireAdapter(callbackActivity, trainInfos);
+        bulleHoraireAdapter adapter = new bulleHoraireAdapter(callbackActivity);
         ((ListView)root.findViewById(R.id.listVue)).setAdapter(adapter);
         Button datePicker = root.findViewById(R.id.date_picker);
         Button timePicker = root.findViewById(R.id.time_picker);
@@ -105,10 +103,9 @@ public class FragmentSearchTrain extends Fragment {
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
-                HttpAsyncGet<TrainInfo> request = new HttpAsyncGet<>(detail, TrainInfo.class, new PostExecuteActivity() {
+                HttpAsyncGet<Train> request = new HttpAsyncGet<>(detail, Train.class, new PostExecuteActivity() {
                     @Override
                     public void onPostExecute(List itemList) {
-                        TrainInfoList.getInstance();
 
                     }
 
@@ -116,7 +113,7 @@ public class FragmentSearchTrain extends Fragment {
                     public void runOnUiThread(Runnable runable) {
 
                     }
-                },null);
+                },new ProgressDialog((Context) callbackActivity));
 
             }
         });

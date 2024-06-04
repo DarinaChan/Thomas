@@ -3,10 +3,10 @@ package edu.thomas.ui.train;
 import android.content.Context;
 import android.widget.TextView;
 
-import edu.thomas.model.train.TrainInfo;
+import edu.thomas.users.Train;
 
 public interface bulleHoraireListener {
-        void onClickNom(TrainInfo item, TextView display);
+        void onClickNom(Train item, TextView display);
         Context getContext();
     }
 

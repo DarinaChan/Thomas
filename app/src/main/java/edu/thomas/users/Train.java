@@ -1,5 +1,8 @@
 package edu.thomas.users;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -8,7 +11,9 @@ import edu.thomas.R;
 import edu.thomas.service.DatabaseService;
 
 public class Train {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd'T'HHmmss")
     private Date departureAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd'T'HHmmss")
     private Date arrivalAt;
     private String departureWhere;
     private String arrivalWhere;
@@ -23,12 +28,28 @@ public class Train {
     public void setDepartureAt(Date departureAt) {
         this.departureAt = departureAt;
     }
+    public void setzzz(String departureAt){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.FRANCE);
+        try {
+            this.departureAt = dateFormat.parse(departureAt);
+        } catch (ParseException e) {
+        }
+    }
 
     public Date getArrivalAt() { return arrivalAt;}
 
     public void setArrivalAt(Date arrivalAt) {
         this.arrivalAt = arrivalAt;
     }
+    public void setzz(String departureAt){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.FRANCE);
+        try {
+            this.arrivalAt = dateFormat.parse(departureAt);
+        } catch (ParseException e) {
+        }
+    }
+
+
     public String getDepartureWhere() {
         return departureWhere;
     }
@@ -87,6 +108,10 @@ public class Train {
         String formattedTime = timeFormatter.format(date);
 
         return new String[]{formattedDate, formattedTime};
+    }
+
+    public Date getTravelTime(){
+        return new Date(arrivalAt.getTime() - departureAt.getTime());
     }
 
     public int getImage(){

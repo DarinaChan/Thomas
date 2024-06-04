@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import edu.thomas.model.train.TrainList;
 import edu.thomas.users.Train;
 import edu.thomas.users.TrainAdapter;
 
@@ -29,11 +30,7 @@ public class FragmentTrain extends Fragment {
         View view = inflater.inflate(R.layout.fragment_train, container, false);
         ListView listView = view.findViewById(R.id.list_view_train);
 
-        List<Train> journeyList = new ArrayList<>();
-        journeyList.add(new Train(new Date(1663981200000L), new Date(1663983300000L), "Antibes", "Nice", "TGV", "123"));
-        journeyList.add(new Train(new Date(1671895800000L), new Date(1671897000000L), "Nice", "Monaco", "TER", "456"));
-
-        TrainAdapter adapter = new TrainAdapter(getContext(), journeyList);
+        TrainAdapter adapter = new TrainAdapter(getContext(), TrainList.getInstance().getTrainInfoList());
         listView.setAdapter(adapter);
 
         FloatingActionButton floatingActionButton = view.findViewById(R.id.floating_action_button);

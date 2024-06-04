@@ -35,6 +35,8 @@ import java.util.List;
 import java.util.Objects;
 
 import edu.thomas.databinding.ActivityMainBinding;
+import edu.thomas.model.train.TrainList;
+import edu.thomas.model.train.TrainStationMap;
 import edu.thomas.service.DatabaseService;
 import edu.thomas.users.Train;
 import edu.thomas.users.User;
@@ -52,7 +54,10 @@ public class MainActivity extends AppCompatActivity  implements CallbackActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestCalendarPermission();
+        TrainStationMap.getInstance(this);
+        TrainList tr = TrainList.getInstance();
+
+                requestCalendarPermission();
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
@@ -87,6 +92,8 @@ public class MainActivity extends AppCompatActivity  implements CallbackActivity
                 Log.d(TAG, "Token = " + task.getResult());
             }
         });
+        tr.addTrain(new Train(new Date(1663981200000L), new Date(1663983300000L), "Antibes", "Nice", "TGV", "123"));
+        tr.addTrain(new Train(new Date(1671895800000L), new Date(1671897000000L), "Nice", "Monaco", "TER", "456"));
 
 //         Add some basic informations in the db
 //        User basicUser = new User("Miguel", "Rodrigo");
