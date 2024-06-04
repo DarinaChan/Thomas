@@ -20,14 +20,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-<<<<<<< choisir-un-trajet
 import edu.thomas.model.train.TrainList;
-=======
-import edu.thomas.model.incident.Incident;
 import edu.thomas.service.DatabaseService;
-import edu.thomas.service.FirestoreIncidentsCallback;
 import edu.thomas.service.FirestoreMiguelCallback;
->>>>>>> master
 import edu.thomas.users.Train;
 import edu.thomas.users.TrainAdapter;
 import edu.thomas.users.User;
@@ -42,13 +37,15 @@ public class FragmentTrain extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_train, container, false);
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.floating_action_button);
+        floatingActionButton.setOnClickListener(v -> {
+            NavController navController = NavHostFragment.findNavController(FragmentTrain.this);
+            navController.navigate(R.id.action_trainFragment_to_searchTrainFragment);
+        });
         fetchTrainNames(view);
         return view;
     }
 
-<<<<<<< choisir-un-trajet
-        TrainAdapter adapter = new TrainAdapter(getContext(), TrainList.getInstance().getTrainInfoList());
-=======
 
 
     public void fetchTrainNames(View view) {
@@ -57,7 +54,7 @@ public class FragmentTrain extends Fragment {
             @Override
             public void onMiguelCallback(User user) {
                 if (user != null) {
-                    journeyList = user.getTrains();
+                    TrainList.getInstance().addAllSearchTrain(user.getTrains());
                     dismissProgressDialog();
                     updateUiWithTrainNames(view);
                 }
@@ -65,21 +62,11 @@ public class FragmentTrain extends Fragment {
         });
     }
     public void updateUiWithTrainNames(View view){
+        TrainAdapter adapter = new TrainAdapter(getContext(), TrainList.getInstance().getTrainInfoList());
         ListView listView = view.findViewById(R.id.list_view_train);
-        TrainAdapter adapter = new TrainAdapter(getContext(), journeyList);
->>>>>>> master
         listView.setAdapter(adapter);
     }
 
-<<<<<<< choisir-un-trajet
-        FloatingActionButton floatingActionButton = view.findViewById(R.id.floating_action_button);
-        floatingActionButton.setOnClickListener(v -> {
-            NavController navController = NavHostFragment.findNavController(FragmentTrain.this);
-            navController.navigate(R.id.action_trainFragment_to_searchTrainFragment);
-        });
-
-        return view;
-=======
     private void showProgressDialog() {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading...");
@@ -92,6 +79,5 @@ public class FragmentTrain extends Fragment {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
->>>>>>> master
     }
 }

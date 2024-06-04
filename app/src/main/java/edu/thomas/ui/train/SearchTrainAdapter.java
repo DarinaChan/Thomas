@@ -20,13 +20,11 @@ import edu.thomas.CallbackActivity;
 import edu.thomas.R;
 import edu.thomas.model.train.TrainList;
 import edu.thomas.service.DatabaseService;
-import edu.thomas.service.FirestoreCallback;
 import edu.thomas.users.Train;
 import edu.thomas.users.User;
 
 public class SearchTrainAdapter extends BaseAdapter  implements SearchTrainListener {
     private final String TAG = "THOMAS "+getClass().getSimpleName();
-    DatabaseService db;
     private final CallbackActivity activity;
     private final LayoutInflater inflater;
 
@@ -42,7 +40,6 @@ public class SearchTrainAdapter extends BaseAdapter  implements SearchTrainListe
         this.activity = Callback;
         inflater = LayoutInflater.from((Context) activity);
         train = trainMockup;
-        this.db = db;
     }
 
 
@@ -116,6 +113,8 @@ public class SearchTrainAdapter extends BaseAdapter  implements SearchTrainListe
     public Context getContext() {
         return inflater.getContext();
     }
+
+
 
 }
 
